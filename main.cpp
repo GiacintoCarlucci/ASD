@@ -10,7 +10,8 @@
 #include "albero.h"
 
 int main(void) {
-	/*
+/*Lista
+ *
 	 std::cout<<"creazione della lista...\n";
 	 Lista<int> l;
 	 std::cout<<"la lista l è vuota: ";
@@ -43,7 +44,8 @@ int main(void) {
 	 l.stampaNodo(indice);
 	 */
 
-	/*
+/*Grafo
+ *
 	 Grafo<std::string> G;
 	 Vertex<std::string> U, V, O,P;
 	 U.label = "U";
@@ -78,7 +80,8 @@ int main(void) {
 	 G.DFS(O,vet);
 	 */
 
-	/*
+/*Coda
+ *
 	 Coda<int> C;
 	 C.inCoda(1);
 	 C.inCoda(2);
@@ -87,7 +90,8 @@ int main(void) {
 	 C.stampaCoda();
 	 */
 
-	/*
+/*Pila
+ *
 	 Pila<int> A;
 	 std::cout<<"pila vuota: "<<A.pilaVuota()<<"\n";
 	 A.stampaPila();
@@ -112,7 +116,8 @@ int main(void) {
 	 A.stampaPila();
 	 */
 
-/*
+/*Insieme
+ *
 	Insieme<int> I;
 	I.inserisci(1);
 	I.inserisci(2);
@@ -154,7 +159,8 @@ int main(void) {
 	std::cout<<"B: ";B.stampaInsieme();
 */
 
-/*
+/*Dizionario
+ *
 	std::cout<<"Creazione Dizionario D...\n";
 	Dizionario<std::string,int> D;
 	std::cout<<"Dizionario D è vuoto: ";
@@ -177,12 +183,12 @@ int main(void) {
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
-	NodoAN<int> u;
+/*	NodoAN<int> u; // fa terminare il programma????
 	u.elemento=5;
 
 	alb.insRadice(u);
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
-
+*/
 	return 0;
 }
