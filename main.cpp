@@ -172,6 +172,7 @@ int main(void) {
 	D.stampa();
 */
 
+
 	Albero<int> alb;
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
