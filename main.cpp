@@ -192,5 +192,6 @@ int main(void) {
 
 	alb.ultimoFratello(u) ? std::cout<<"u è l'ultimo fratello\n" : std::cout<<"u non è l'ultimo fratello\n" ;
 	alb.radice()==nullptr ? std::cout<<"nessuna radice\n" : std::cout<<"elemento nella radice: "<<alb.radice()->elemento<<"\n";
+	alb.padre(u)==nullptr ? std::cout<<"nessuna padre di u\n" : std::cout<<"elemento del padre: "<<alb.padre(u)->elemento<<"\n";
 	return 0;
 }
