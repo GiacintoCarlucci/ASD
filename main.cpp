@@ -191,6 +191,6 @@ int main(void) {
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
 	alb.ultimoFratello(u) ? std::cout<<"u è l'ultimo fratello\n" : std::cout<<"u non è l'ultimo fratello\n" ;
-
+	alb.radice()==nullptr ? std::cout<<"nessuna radice\n" : std::cout<<"elemento nella radice: "<<alb.radice()->elemento<<"\n";
 	return 0;
 }

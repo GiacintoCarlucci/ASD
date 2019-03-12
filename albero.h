@@ -33,7 +33,7 @@ public:
 	bool alberoVuoto() const;
 	bool foglia(NodoAN<T>) const;
 	bool ultimoFratello(NodoAN<T>) const;
-	NodoAN<T> radice() const;
+	NodoAN<T>* radice() const;
 	NodoAN<T> padre(NodoAN<T>) const;
 	NodoAN<T> primoFiglio(NodoAN<T>) const;
 	NodoAN<T> succFratello(NodoAN<T>) const;
@@ -94,6 +94,17 @@ template <class T> bool Albero<T>::ultimoFratello(NodoAN<T> u)const{
 	}
 
 	return false;
+}
+
+template <class T> NodoAN<T>* Albero<T>::radice() const{
+	//pre : albero non vuoto
+	//post: ritorna u radice dell'albero, livello di u = 0
+
+	if(!this->alberoVuoto()){
+		return Albero<T>::albero->primoFiglio;
+	}else{
+		return nullptr;
+	}
 }
 
 template <class T> void Albero<T>::insRadice(NodoAN<T> u){
