@@ -74,9 +74,15 @@ template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 
 	if (!this->alberoVuoto()) {
 		//if (esiste il nodo)
-		if (u.padre != nullptr){
-			if(u.primoFiglio == nullptr){
-				if(u.livello == u.padre->livello + 1){
+		if (u.padre != nullptr) {
+			if (u.primoFiglio == nullptr) {
+				//se l'albero che stiamo analizzando è composto dalla sola radice (u non  ha padre):
+				if (u.padre == this->radice()) {
+					if (u.livello == 0 && u.padre->livello == 0) {
+						return true;
+					}
+				//se il nodo u ha un padre:
+				} else if (u.livello == u.padre->livello + 1) {
 					return true;
 				}
 			}
@@ -115,9 +121,9 @@ template<class T> NodoAN<T>* Albero<T>::padre(NodoAN<T> u) const {
 
 	if (!this->alberoVuoto()) {
 		//if u appartiene all'albero
-		if(u.livello > 0){
-			if(&u == u.padre->primoFiglio){
-				if(u.livello == u.padre->livello + 1){
+		if (u.livello > 0) {
+			if (&u == u.padre->primoFiglio) {
+				if (u.livello == u.padre->livello + 1) {
 					return u.padre;
 				}
 			}
@@ -131,16 +137,26 @@ template<class T> NodoAN<T>* Albero<T>::primoFiglio(NodoAN<T> u) const {
 	//post: arco (u,v) appartiene all'albero, livello di v = livello di u + 1,
 	//      v è primo secondo la relazione d'ordine stabilita tra i figli di u
 	if (!this->alberoVuoto()) {
-		if(this->foglia(u)){
-			std::cout<<"è trasout\n";
-			if(&u == u.primoFiglio->padre){
-				if(u.livello == u.primoFiglio->livello -1){
+		if (!this->foglia(u)) {
+			if (&u == u.primoFiglio->padre) {
+				if (u.livello == u.primoFiglio->livello - 1) {
 					return u.primoFiglio;
 				}
 			}
 		}
 	}
 	return nullptr;
+}
+
+template<class T> NodoAN<T>* Albero<T>::succFratello(NodoAN<T> u) const {
+	//pre: albero non vuoto, ultimoFratello()=falso
+	//post: u e v(fratello) hanno lo stesso padre, livello di u = livello di v
+	//      v è il fratello che segue u nella relazione d'ordine
+
+	if (!this->alberoVuoto()) {
+
+	}
+
 }
 
 template<class T> void Albero<T>::insRadice(NodoAN<T> u) {

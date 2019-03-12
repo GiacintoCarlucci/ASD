@@ -186,11 +186,12 @@ int main(void) {
 	//TODO: creare costruttore nodo
 	NodoAN<int> u;
 	u.elemento=5;
-	u.padre=alb.radice();
+	u.livello=0;
 	u.primoFiglio=nullptr;
 	u.fratello=nullptr;
 
 	alb.insRadice(u);
+	u.padre=alb.radice();
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
