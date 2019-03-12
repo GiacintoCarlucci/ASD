@@ -92,6 +92,8 @@ template <class T> bool Albero<T>::ultimoFratello(NodoAN<T> u)const{
 		//if temp non vuoto (esiste u)
 			return u.fratello == nullptr;
 	}
+
+	return false;
 }
 
 template <class T> void Albero<T>::insRadice(NodoAN<T> u){
