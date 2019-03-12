@@ -183,8 +183,12 @@ int main(void) {
 	std::cout<<"l'albero 'alb' Ã¨ vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
-	NodoAN<int> u; // fa terminare il programma????
+	//TODO: creare costruttore nodo
+	NodoAN<int> u;
 	u.elemento=5;
+	u.padre=alb.radice();
+	u.primoFiglio=nullptr;
+	u.fratello=nullptr;
 
 	alb.insRadice(u);
 	std::cout<<"l'albero 'alb' Ã¨ vuoto: ";
@@ -192,6 +196,7 @@ int main(void) {
 
 	alb.ultimoFratello(u) ? std::cout<<"u è l'ultimo fratello\n" : std::cout<<"u non è l'ultimo fratello\n" ;
 	alb.radice()==nullptr ? std::cout<<"nessuna radice\n" : std::cout<<"elemento nella radice: "<<alb.radice()->elemento<<"\n";
-	alb.padre(u)==nullptr ? std::cout<<"nessuna padre di u\n" : std::cout<<"elemento del padre: "<<alb.padre(u)->elemento<<"\n";
+	alb.padre(u)==nullptr ? std::cout<<"nessun padre di u\n" : std::cout<<"elemento del padre: "<<alb.padre(u)->elemento<<"\n";
+	alb.primoFiglio(u)==nullptr ? std::cout<<"nessun figlio di u\n" : std::cout<<"elemento del figlio: "<<alb.primoFiglio(u)->elemento<<"\n";
 	return 0;
 }

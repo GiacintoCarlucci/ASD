@@ -70,17 +70,19 @@ template<class T> bool Albero<T>::alberoVuoto() const {
 
 template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 	//pre: albero non vuoto, u esiste nell'albero
-	//post: true se esiste un padre di u, non esiste figlio di u, livello di u Ã¨ di un unitÃ  maggiore del padre
+	//post: true se esiste un padre di u, non esiste figlio di u, livello di u = livello padre +1
 
 	if (!this->alberoVuoto()) {
-		NodoAN<T> *temp; // = trovaNodo(u);
-		//if temp non vuoto (esiste il nodo)
-		// controllo padre e figlio
-		//controllo il livello
-		//restituisco true o false
+		//if (esiste il nodo)
+		if (u.padre != nullptr){
+			if(u.primoFiglio == nullptr){
+				if(u.livello == u.padre->livello + 1){
+					return true;
+				}
+			}
+		}
 	}
-
-	return false; //da togliere
+	return false;
 }
 
 template<class T> bool Albero<T>::ultimoFratello(NodoAN<T> u) const {
@@ -117,6 +119,23 @@ template<class T> NodoAN<T>* Albero<T>::padre(NodoAN<T> u) const {
 			if(&u == u.padre->primoFiglio){
 				if(u.livello == u.padre->livello + 1){
 					return u.padre;
+				}
+			}
+		}
+	}
+	return nullptr;
+}
+
+template<class T> NodoAN<T>* Albero<T>::primoFiglio(NodoAN<T> u) const {
+	//pre: albero non vuoto, foglia(u)=falso
+	//post: arco (u,v) appartiene all'albero, livello di v = livello di u + 1,
+	//      v è primo secondo la relazione d'ordine stabilita tra i figli di u
+	if (!this->alberoVuoto()) {
+		if(this->foglia(u)){
+			std::cout<<"è trasout\n";
+			if(&u == u.primoFiglio->padre){
+				if(u.livello == u.primoFiglio->livello -1){
+					return u.primoFiglio;
 				}
 			}
 		}
