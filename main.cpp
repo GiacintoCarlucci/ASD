@@ -199,5 +199,6 @@ int main(void) {
 	alb.radice()==nullptr ? std::cout<<"nessuna radice\n" : std::cout<<"elemento nella radice: "<<alb.radice()->elemento<<"\n";
 	alb.padre(u)==nullptr ? std::cout<<"nessun padre di u\n" : std::cout<<"elemento del padre: "<<alb.padre(u)->elemento<<"\n";
 	alb.primoFiglio(u)==nullptr ? std::cout<<"nessun figlio di u\n" : std::cout<<"elemento del figlio: "<<alb.primoFiglio(u)->elemento<<"\n";
+	alb.succFratello(u)==nullptr ? std::cout<<"nessun fratello di u\n" : std::cout<<"elemento del fratello: "<<alb.succFratello(u)->elemento<<"\n";
 	return 0;
 }

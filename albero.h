@@ -73,7 +73,7 @@ template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 	//post: true se esiste un padre di u, non esiste figlio di u, livello di u = livello padre +1
 
 	if (!this->alberoVuoto()) {
-		//if (esiste il nodo)
+		//if (esiste u)
 		if (u.padre != nullptr) {
 			if (u.primoFiglio == nullptr) {
 				//se l'albero che stiamo analizzando è composto dalla sola radice (u non  ha padre):
@@ -81,7 +81,7 @@ template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 					if (u.livello == 0 && u.padre->livello == 0) {
 						return true;
 					}
-				//se il nodo u ha un padre:
+					//se il nodo u ha un padre:
 				} else if (u.livello == u.padre->livello + 1) {
 					return true;
 				}
@@ -93,15 +93,25 @@ template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 
 template<class T> bool Albero<T>::ultimoFratello(NodoAN<T> u) const {
 	//pre: albero non vuoto, u esiste nell'albero
-	//post: vero se non esistono altri fratelli che lo seguono nella relazione d'ordine
-	//      falso altrimenti
+	//post: true se esiste il padre di u, non esistono altri fratelli di u, livello di u = livello padre +1
+	//      false altrimenti
 
 	if (!this->alberoVuoto()) {
-		NodoAN<T> *temp; // = trovaNodo(u);
-		//if temp non vuoto (esiste u)
-		return u.fratello == nullptr;
+		//if (esiste u)
+		if (u.padre != nullptr) {
+			if (u.fratello == nullptr) {
+				//se l'albero che stiamo analizzando è composto dalla sola radice (u non  ha padre):
+				if (u.padre == this->radice()) {
+					if (u.livello == 0 && u.padre->livello == 0) {
+						return true;
+					}
+					//se il nodo u ha un padre:
+				} else if (u.livello == u.padre->livello + 1) {
+					return true;
+				}
+			}
+		}
 	}
-
 	return false;
 }
 
@@ -154,8 +164,15 @@ template<class T> NodoAN<T>* Albero<T>::succFratello(NodoAN<T> u) const {
 	//      v è il fratello che segue u nella relazione d'ordine
 
 	if (!this->alberoVuoto()) {
-
+		if (!this->ultimoFratello(u)) {
+			if (u.padre == u.fratello->padre) {
+				if (u.livello == u.fratello->livello) {
+					return u.fratello;
+				}
+			}
+		}
 	}
+	return nullptr;
 
 }
 
