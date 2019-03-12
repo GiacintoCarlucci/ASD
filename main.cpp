@@ -183,12 +183,12 @@ int main(void) {
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
-/*	NodoAN<int> u; // fa terminare il programma????
+	NodoAN<int> u; // fa terminare il programma????
 	u.elemento=5;
 
 	alb.insRadice(u);
 	std::cout<<"l'albero 'alb' è vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
-*/
+
 	return 0;
 }

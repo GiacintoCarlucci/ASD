@@ -14,9 +14,10 @@ struct NodoAN {
 	NodoAN<T> * fratello;
 
 	~NodoAN(){
-		delete primoFiglio;
+		//scrivere il distruttore, così termina inaspettatamente
+		/*delete primoFiglio;
 		delete fratello;
-		delete padre;
+		delete padre;*/
 	}
 };
 
