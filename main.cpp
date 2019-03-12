@@ -190,5 +190,7 @@ int main(void) {
 	std::cout<<"l'albero 'alb' Ã¨ vuoto: ";
 	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
 
+	alb.ultimoFratello(u) ? std::cout<<"u è l'ultimo fratello\n" : std::cout<<"u non è l'ultimo fratello\n" ;
+
 	return 0;
 }

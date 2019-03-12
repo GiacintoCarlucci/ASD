@@ -82,6 +82,18 @@ template <class T> bool Albero<T>::foglia(NodoAN<T> u)const{
 	return false; //da togliere
 }
 
+template <class T> bool Albero<T>::ultimoFratello(NodoAN<T> u)const{
+	//pre: albero non vuoto, u esiste nell'albero
+	//post: vero se non esistono altri fratelli che lo seguono nella relazione d'ordine
+	//      falso altrimenti
+
+	if(!this->alberoVuoto()){
+		NodoAN<T> *temp; // = trovaNodo(u);
+		//if temp non vuoto (esiste u)
+			return u.fratello == nullptr;
+	}
+}
+
 template <class T> void Albero<T>::insRadice(NodoAN<T> u){
 	if(this->alberoVuoto()){
 		albero->primoFiglio = new NodoAN<T>();
