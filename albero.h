@@ -14,7 +14,7 @@ struct NodoAN {
 	NodoAN<T> * fratello;
 
 	~NodoAN() {
-		//scrivere il distruttore, così termina inaspettatamente
+		//scrivere il distruttore, cosï¿½ termina inaspettatamente
 		/*delete primoFiglio;
 		 delete fratello;
 		 delete padre;*/
@@ -76,7 +76,7 @@ template<class T> bool Albero<T>::foglia(NodoAN<T> u) const {
 		//if (esiste u)
 		if (u.padre != nullptr) {
 			if (u.primoFiglio == nullptr) {
-				//se l'albero che stiamo analizzando è composto dalla sola radice (u non  ha padre):
+				//se l'albero che stiamo analizzando ï¿½ composto dalla sola radice (u non  ha padre):
 				if (u.padre == this->radice()) {
 					if (u.livello == 0 && u.padre->livello == 0) {
 						return true;
@@ -100,7 +100,7 @@ template<class T> bool Albero<T>::ultimoFratello(NodoAN<T> u) const {
 		//if (esiste u)
 		if (u.padre != nullptr) {
 			if (u.fratello == nullptr) {
-				//se l'albero che stiamo analizzando è composto dalla sola radice (u non  ha padre):
+				//se l'albero che stiamo analizzando ï¿½ composto dalla sola radice (u non  ha padre):
 				if (u.padre == this->radice()) {
 					if (u.livello == 0 && u.padre->livello == 0) {
 						return true;
@@ -127,7 +127,7 @@ template<class T> NodoAN<T>* Albero<T>::radice() const {
 
 template<class T> NodoAN<T>* Albero<T>::padre(NodoAN<T> u) const {
 	//pre: albero non vuoto, u appartiene all'albero, livello di u > 0
-	//post: v è padre di u, arco (v,u) appartiene all'albero, livello di u = livello di v + 1
+	//post: v ï¿½ padre di u, arco (v,u) appartiene all'albero, livello di u = livello di v + 1
 
 	if (!this->alberoVuoto()) {
 		//if u appartiene all'albero
@@ -145,7 +145,7 @@ template<class T> NodoAN<T>* Albero<T>::padre(NodoAN<T> u) const {
 template<class T> NodoAN<T>* Albero<T>::primoFiglio(NodoAN<T> u) const {
 	//pre: albero non vuoto, foglia(u)=falso
 	//post: arco (u,v) appartiene all'albero, livello di v = livello di u + 1,
-	//      v è primo secondo la relazione d'ordine stabilita tra i figli di u
+	//      v ï¿½ primo secondo la relazione d'ordine stabilita tra i figli di u
 	if (!this->alberoVuoto()) {
 		if (!this->foglia(u)) {
 			if (&u == u.primoFiglio->padre) {
@@ -161,7 +161,7 @@ template<class T> NodoAN<T>* Albero<T>::primoFiglio(NodoAN<T> u) const {
 template<class T> NodoAN<T>* Albero<T>::succFratello(NodoAN<T> u) const {
 	//pre: albero non vuoto, ultimoFratello()=falso
 	//post: u e v(fratello) hanno lo stesso padre, livello di u = livello di v
-	//      v è il fratello che segue u nella relazione d'ordine
+	//      v ï¿½ il fratello che segue u nella relazione d'ordine
 
 	if (!this->alberoVuoto()) {
 		if (!this->ultimoFratello(u)) {
@@ -184,6 +184,20 @@ template<class T> void Albero<T>::insRadice(NodoAN<T> u) {
 		albero->primoFiglio->primoFiglio = nullptr;
 		albero->primoFiglio->fratello = nullptr;
 		albero->primoFiglio->livello = 0;
+	}
+}
+
+template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> u, Albero a){//da testare*****
+	//pre: alberi non vuoti, u appartiene all'albero
+	//post: l'albero in output Ã¨ ottenuto aggiungendo l'albero a
+	//      la cui radice r Ã¨ il nuovo primofiglio di u
+
+	if(!this->alberoVuoto() && !a.alberoVuoto()){
+		//if(u esiste nell'albero corrente)
+		a.albero->padre=&u;
+		a.albero->fratello=u.primoFiglio;
+		u.primoFiglio=a.albero->primoFiglio;
+		a.albero->livello=u.livello+1;//e di conseguenza aggiornare tutti i livelli del sottoalbero inserito
 	}
 }
 
