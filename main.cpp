@@ -10,8 +10,8 @@
 #include "albero.h"
 
 int main(void) {
-/*Lista
- *
+	/*Lista
+	 *
 	 std::cout<<"creazione della lista...\n";
 	 Lista<int> l;
 	 std::cout<<"la lista l è vuota: ";
@@ -44,8 +44,8 @@ int main(void) {
 	 l.stampaNodo(indice);
 	 */
 
-/*Grafo
- *
+	/*Grafo
+	 *
 	 Grafo<std::string> G;
 	 Vertex<std::string> U, V, O,P;
 	 U.label = "U";
@@ -80,8 +80,8 @@ int main(void) {
 	 G.DFS(O,vet);
 	 */
 
-/*Coda
- *
+	/*Coda
+	 *
 	 Coda<int> C;
 	 C.inCoda(1);
 	 C.inCoda(2);
@@ -90,8 +90,8 @@ int main(void) {
 	 C.stampaCoda();
 	 */
 
-/*Pila
- *
+	/*Pila
+	 *
 	 Pila<int> A;
 	 std::cout<<"pila vuota: "<<A.pilaVuota()<<"\n";
 	 A.stampaPila();
@@ -116,91 +116,123 @@ int main(void) {
 	 A.stampaPila();
 	 */
 
-/*Insieme
- *
-	Insieme<int> I;
-	I.inserisci(1);
-	I.inserisci(2);
-	I.inserisci(3);
-	I.inserisci(4);
-	I.inserisci(5);
+	/*Insieme
+	 *
+	 Insieme<int> I;
+	 I.inserisci(1);
+	 I.inserisci(2);
+	 I.inserisci(3);
+	 I.inserisci(4);
+	 I.inserisci(5);
 
-	Insieme<int> B;
-	B.inserisci(1);
-	B.inserisci(2);
-	B.inserisci(3);
-	B.inserisci(7);
+	 Insieme<int> B;
+	 B.inserisci(1);
+	 B.inserisci(2);
+	 B.inserisci(3);
+	 B.inserisci(7);
 
-	std::cout<<"I: ";I.stampaInsieme();
-	std::cout<<"B: ";B.stampaInsieme();
+	 std::cout<<"I: ";I.stampaInsieme();
+	 std::cout<<"B: ";B.stampaInsieme();
 
-	std::cout<<"I intersezione B:\n";
-	I.intersezione(B);
+	 std::cout<<"I intersezione B:\n";
+	 I.intersezione(B);
 
-	std::cout<<"I: ";I.stampaInsieme();
-	std::cout<<"B: ";B.stampaInsieme();
+	 std::cout<<"I: ";I.stampaInsieme();
+	 std::cout<<"B: ";B.stampaInsieme();
 
-	std::cout<<"I unione B:\n";
-	I.unione(B);
+	 std::cout<<"I unione B:\n";
+	 I.unione(B);
 
-	std::cout<<"I: ";I.stampaInsieme();
-	std::cout<<"B: ";B.stampaInsieme();
+	 std::cout<<"I: ";I.stampaInsieme();
+	 std::cout<<"B: ";B.stampaInsieme();
 
-	std::cout<<"I differenza B:\n";
-	I.differenza(B);
+	 std::cout<<"I differenza B:\n";
+	 I.differenza(B);
 
-	std::cout<<"I: ";I.stampaInsieme();
-	std::cout<<"B: ";B.stampaInsieme();
+	 std::cout<<"I: ";I.stampaInsieme();
+	 std::cout<<"B: ";B.stampaInsieme();
 
-	std::cout<<"I intersezione B:\n";
-	I.intersezione(B);
+	 std::cout<<"I intersezione B:\n";
+	 I.intersezione(B);
 
-	std::cout<<"I: ";I.stampaInsieme();
-	std::cout<<"B: ";B.stampaInsieme();
-*/
+	 std::cout<<"I: ";I.stampaInsieme();
+	 std::cout<<"B: ";B.stampaInsieme();
+	 */
 
-/*Dizionario
- *
-	std::cout<<"Creazione Dizionario D...\n";
-	Dizionario<std::string,int> D;
-	std::cout<<"Dizionario D è vuoto: ";
-	D.dizionarioVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
-	std::cout<<"chiave 'sole' esiste: ";
-	D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
-	std::cout<<"Inserimento di 'sole' con valore '1'...\n";
-	D.inserisci("sole", 1);
-	std::cout<<"chiave 'sole' esiste: ";
-	D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
-	std::cout<<"cancellazione di 'sole'...\n";
-	D.cancella("sole");
-	std::cout<<"chiave 'sole' esiste: ";
-	D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
-	D.stampa();
-*/
-
+	/*Dizionario
+	 *
+	 std::cout<<"Creazione Dizionario D...\n";
+	 Dizionario<std::string,int> D;
+	 std::cout<<"Dizionario D è vuoto: ";
+	 D.dizionarioVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
+	 std::cout<<"chiave 'sole' esiste: ";
+	 D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
+	 std::cout<<"Inserimento di 'sole' con valore '1'...\n";
+	 D.inserisci("sole", 1);
+	 std::cout<<"chiave 'sole' esiste: ";
+	 D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
+	 std::cout<<"cancellazione di 'sole'...\n";
+	 D.cancella("sole");
+	 std::cout<<"chiave 'sole' esiste: ";
+	 D.appartiene("sole") ? std::cout<<"si\n" : std::cout<<"no\n";
+	 D.stampa();
+	 */
 
 	Albero<int> alb;
-	std::cout<<"l'albero 'alb' è vuoto: ";
-	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
+	std::cout << "l'albero 'alb' è vuoto: ";
+	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
 
 	//TODO: creare costruttore nodo
 	NodoAN<int> u;
-	u.elemento=5;
+	u.elemento = 5;
 
 	alb.insRadice(u);
-	u.padre=alb.radice();
-	std::cout<<"l'albero 'alb' è vuoto: ";
-	alb.alberoVuoto() ? std::cout<<"si\n" : std::cout<<"no\n";
+	u.padre = alb.radice();
+	std::cout << "l'albero 'alb' è vuoto: ";
+	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
 
-	alb.ultimoFratello(u) ? std::cout<<"u � l'ultimo fratello\n" : std::cout<<"u non � l'ultimo fratello\n" ;
-	alb.radice()==nullptr ? std::cout<<"nessuna radice\n" : std::cout<<"elemento nella radice: "<<alb.radice()->elemento<<"\n";
-	alb.padre(u)==nullptr ? std::cout<<"nessun padre di u\n" : std::cout<<"elemento del padre: "<<alb.padre(u)->elemento<<"\n";
-	alb.primoFiglio(u)==nullptr ? std::cout<<"nessun figlio di u\n" : std::cout<<"elemento del figlio: "<<alb.primoFiglio(u)->elemento<<"\n";
-	alb.succFratello(u)==nullptr ? std::cout<<"nessun fratello di u\n" : std::cout<<"elemento del fratello: "<<alb.succFratello(u)->elemento<<"\n";
-	Albero<int> a;
-	a.insRadice(u);
-	alb.insSottoAlberoFiglio(u, a);
-	std::cout<<alb.radice()->elemento;
-	std::cout<<alb.radice()->primoFiglio->elemento; //errore
+	alb.ultimoFratello(u) ?
+			std::cout << "u � l'ultimo fratello\n" :
+			std::cout << "u non � l'ultimo fratello\n";
+	alb.radice() == nullptr ?
+			std::cout << "nessuna radice\n" :
+			std::cout << "elemento nella radice: " << alb.radice()->elemento
+					<< "\n";
+	alb.padre(u) == nullptr ?
+			std::cout << "nessun padre di u\n" :
+			std::cout << "elemento del padre: " << alb.padre(u)->elemento
+					<< "\n";
+	alb.primoFiglio(u) == nullptr ?
+			std::cout << "nessun figlio di u\n" :
+			std::cout << "elemento del figlio: " << alb.primoFiglio(u)->elemento
+					<< "\n";
+	alb.succFratello(u) == nullptr ?
+			std::cout << "nessun fratello di u\n" :
+			std::cout << "elemento del fratello: "
+					<< alb.succFratello(u)->elemento << "\n";
+	/*Albero<int> a;
+	 a.insRadice(u);
+	 alb.insSottoAlberoFiglio(u, a);
+	 std::cout<<alb.radice()->elemento;
+	 std::cout<<alb.radice()->primoFiglio->elemento; //errore*/
+
+	Albero<int> Albero;
+	NodoAN<int> uno;
+	uno.elemento = 1;
+	Albero.insRadice(uno);
+	Albero.insFiglio(Albero.radice(),5);
+	Albero.insFiglio(Albero.radice()->primoFiglio,8);
+	Albero.insFiglio(Albero.radice()->primoFiglio,7);
+	Albero.insFiglio(Albero.radice(),4);
+	Albero.insFiglio(Albero.radice()->primoFiglio,6);
+	Albero.insFiglio(Albero.radice(),3);
+	std::cout<<Albero.radice()->elemento<<std::endl;//1
+	std::cout<<Albero.radice()->primoFiglio->elemento<<std::endl;//3
+	std::cout<<Albero.radice()->primoFiglio->fratello->elemento<<std::endl;//4
+	std::cout<<Albero.radice()->primoFiglio->fratello->primoFiglio->elemento<<std::endl;//6
+	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//5
+	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->elemento<<std::endl;//7
+	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
+	//inserisce male 7 e 8
 	return 0;
 }
