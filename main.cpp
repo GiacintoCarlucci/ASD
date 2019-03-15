@@ -186,9 +186,6 @@ int main(void) {
 	//TODO: creare costruttore nodo
 	NodoAN<int> u;
 	u.elemento=5;
-	u.livello=0;
-	u.primoFiglio=nullptr;
-	u.fratello=nullptr;
 
 	alb.insRadice(u);
 	u.padre=alb.radice();
@@ -204,6 +201,6 @@ int main(void) {
 	a.insRadice(u);
 	alb.insSottoAlberoFiglio(u, a);
 	std::cout<<alb.radice()->elemento;
-	//std::cout<<alb.radice()->primoFiglio->elemento; //errore
+	std::cout<<alb.radice()->primoFiglio->elemento; //errore
 	return 0;
 }

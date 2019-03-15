@@ -7,11 +7,11 @@
 
 template<class T>
 struct NodoAN {
-	T elemento;
-	int livello;
-	NodoAN<T> * padre;
-	NodoAN<T> * primoFiglio;
-	NodoAN<T> * fratello;
+	T elemento = T();
+	int livello = 0;
+	NodoAN<T> * padre = nullptr;
+	NodoAN<T> * primoFiglio = nullptr;
+	NodoAN<T> * fratello = nullptr;
 
 	~NodoAN() {
 		//scrivere il distruttore, cos� termina inaspettatamente
@@ -187,17 +187,26 @@ template<class T> void Albero<T>::insRadice(NodoAN<T> u) {
 	}
 }
 
-template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> u, Albero a){//da testare*****
+template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> u, Albero a) {	//da testare*****
 	//pre: alberi non vuoti, u appartiene all'albero
 	//post: l'albero in output è ottenuto aggiungendo l'albero a
 	//      la cui radice r è il nuovo primofiglio di u
 
-	if(!this->alberoVuoto() && !a.alberoVuoto()){
+	if (!this->alberoVuoto() && !a.alberoVuoto()) {
 		//if(u esiste nell'albero corrente)
-		a.albero->padre=&u;
-		a.albero->fratello=u.primoFiglio;
-		u.primoFiglio=a.albero->primoFiglio;
-		a.albero->livello=u.livello+1;//e di conseguenza aggiornare tutti i livelli del sottoalbero inserito
+
+		/*codice esempio, al posto di this->radice() va messo
+		 * l'indirizzo del nodo u reale nell'albero*/
+		NodoAN<T> *temp = this->radice();
+		a.albero->primoFiglio->padre = temp;
+		//se ci sono eventuali fratelli vengono aggiunti ad a
+		if (temp->primoFiglio != nullptr) {
+			a.albero->primoFiglio->fratello = new NodoAN<T>();
+			a.albero->primoFiglio->fratello = temp->primoFiglio;
+		}
+		temp->primoFiglio = a.albero->primoFiglio;
+		/*aggiornare poi tutti i livelli di quel sotto albero*/
+		a.albero->primoFiglio->livello = temp->livello + 1;
 	}
 }
 
