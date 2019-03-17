@@ -179,21 +179,21 @@ int main(void) {
 	 */
 
 	Albero<int> alb;
-	std::cout << "l'albero 'alb' è vuoto: ";
+	std::cout << "albero 'alb' vuoto: ";
 	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
 
 	//TODO: creare costruttore nodo
 	NodoAN<int> u;
 	u.elemento = 5;
 
-	alb.insRadice(u);
+	alb.insRadice(u.elemento);
 	u.padre = alb.radice();
-	std::cout << "l'albero 'alb' è vuoto: ";
+	std::cout << "albero 'alb' vuoto: ";
 	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
 
 	alb.ultimoFratello(u) ?
-			std::cout << "u � l'ultimo fratello\n" :
-			std::cout << "u non � l'ultimo fratello\n";
+			std::cout << "u ultimo fratello\n" :
+			std::cout << "u non ultimo fratello\n";
 	alb.radice() == nullptr ?
 			std::cout << "nessuna radice\n" :
 			std::cout << "elemento nella radice: " << alb.radice()->elemento
@@ -216,10 +216,14 @@ int main(void) {
 	 std::cout<<alb.radice()->elemento;
 	 std::cout<<alb.radice()->primoFiglio->elemento; //errore*/
 
+	/*creo il seguente albero:
+	 *     1
+	 * 3   4   5
+	 *     6  7 8
+	 */
+
 	Albero<int> Albero;
-	NodoAN<int> uno;
-	uno.elemento = 1;
-	Albero.insRadice(uno);
+	Albero.insRadice(1);
 	Albero.insFiglio(Albero.radice(),5);
 	Albero.insFiglio(Albero.radice()->primoFiglio,8);
 	Albero.insFiglio(Albero.radice()->primoFiglio,7);
@@ -234,10 +238,8 @@ int main(void) {
 	std::cout<<Albero.radice()->primoFiglio->fratello->primoFiglio->elemento<<std::endl;//6
 	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//5
 	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->elemento<<std::endl;//7
-	//std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->livello<<std::endl;//8
+	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
 
-	//inserisce 8 come fratello di 5:
-	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->fratello->elemento<<std::endl;//5->fratello = 8
 
 	return 0;
 }

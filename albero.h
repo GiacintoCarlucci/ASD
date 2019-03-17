@@ -39,7 +39,7 @@ public:
 	NodoAN<T>* succFratello(NodoAN<T>) const;
 
 	//Modficatori
-	void insRadice(NodoAN<T>);
+	void insRadice(T);
 	void insFiglio(NodoAN<T>*, T);
 	void insFratello(NodoAN<T>*, T);
 	void insSottoAlberoFiglio(NodoAN<T>, Albero);
@@ -178,14 +178,11 @@ template<class T> NodoAN<T>* Albero<T>::succFratello(NodoAN<T> u) const {
 
 }
 
-template<class T> void Albero<T>::insRadice(NodoAN<T> u) {
+template<class T> void Albero<T>::insRadice(T e) {
 	if (this->alberoVuoto()) {
 		albero->primoFiglio = new NodoAN<T>();
-		albero->primoFiglio->elemento = u.elemento;
+		albero->primoFiglio->elemento = e;
 		albero->primoFiglio->padre = albero;
-		albero->primoFiglio->primoFiglio = nullptr;
-		albero->primoFiglio->fratello = nullptr;
-		albero->primoFiglio->livello = 0;
 	}
 }
 
@@ -198,13 +195,7 @@ template<class T> void Albero<T>::insFiglio(NodoAN<T> *u, T e) {
 			NodoAN<T> *frat = u->primoFiglio;
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio->padre = u;
-			if (u == this->radice()) {
-				u->primoFiglio->fratello = frat;
-				//std::cout<<"ho inserito "<<e<<"\n";
-			} else {
-				u->fratello = frat;
-				//std::cout<<"ho inserito "<<e<<"\n";
-			}
+			u->primoFiglio->fratello = frat;
 		}
 		u->primoFiglio->elemento = e;
 		u->primoFiglio->livello = u->livello + 1;
