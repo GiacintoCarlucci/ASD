@@ -226,13 +226,18 @@ int main(void) {
 	Albero.insFiglio(Albero.radice(),4);
 	Albero.insFiglio(Albero.radice()->primoFiglio,6);
 	Albero.insFiglio(Albero.radice(),3);
+
+	//si blocca se provo a stampare un nullptr
 	std::cout<<Albero.radice()->elemento<<std::endl;//1
 	std::cout<<Albero.radice()->primoFiglio->elemento<<std::endl;//3
 	std::cout<<Albero.radice()->primoFiglio->fratello->elemento<<std::endl;//4
 	std::cout<<Albero.radice()->primoFiglio->fratello->primoFiglio->elemento<<std::endl;//6
 	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//5
 	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->elemento<<std::endl;//7
-	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
-	//inserisce male 7 e 8
+	//std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->livello<<std::endl;//8
+
+	//inserisce 8 come fratello di 5:
+	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->fratello->elemento<<std::endl;//5->fratello = 8
+
 	return 0;
 }

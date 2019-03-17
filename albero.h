@@ -190,7 +190,7 @@ template<class T> void Albero<T>::insRadice(NodoAN<T> u) {
 }
 
 template<class T> void Albero<T>::insFiglio(NodoAN<T> *u, T e) {
-	if (!this->alberoVuoto()) {
+	if (!this->alberoVuoto() && u!= nullptr) {
 		if (u->primoFiglio == nullptr) {
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio->padre = u;
