@@ -212,26 +212,20 @@ template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {
 	//      la cui radice r e' il nuovo primofiglio di u
 
 	if (!this->alberoVuoto() && !a.alberoVuoto()) {
-		/*//if(u esiste nell'albero corrente)
-
-		a.albero->primoFiglio->padre = u;
-		//se ci sono eventuali fratelli vengono aggiunti ad a
-		if (u->primoFiglio != nullptr) {
-			a.albero->primoFiglio->fratello = new NodoAN<T>();
-			a.albero->primoFiglio->fratello = u->primoFiglio;
-		}
-		u->primoFiglio = a.albero->primoFiglio;
-		//aggiornare poi tutti i livelli di quel sotto albero
-		a.albero->primoFiglio->livello = u->livello + 1;
-		*/
-		//a.albero->primoFiglio->padre = u;
 		if(u->primoFiglio==nullptr){
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio = a.albero->primoFiglio;
 			u->primoFiglio->padre = u;
+		}else{
+			NodoAN<T> *frat = u->primoFiglio;
+			u->primoFiglio = new NodoAN<T>();
+			u->primoFiglio = a.albero->primoFiglio;
+			u->primoFiglio->padre = u;
+			u->primoFiglio->fratello = frat;
 		}
 
 	}
+	//bisogna aggiornare i livelli dell'albero inserito
 }
 
 #endif /* ALBERO_H_ */
