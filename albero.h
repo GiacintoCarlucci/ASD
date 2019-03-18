@@ -42,7 +42,7 @@ public:
 	void insRadice(T);
 	void insFiglio(NodoAN<T>*, T);
 	void insFratello(NodoAN<T>*, T);
-	void insSottoAlberoFiglio(NodoAN<T>, Albero);
+	void insSottoAlberoFiglio(NodoAN<T>*, Albero);
 	void insSottoAlberoFratello(NodoAN<T>, Albero);
 	void cancSottoAlbero(NodoAN<T>);
 
@@ -206,26 +206,31 @@ template<class T> void Albero<T>::insFratello(NodoAN<T> *u, T e) {
 
 }
 
-template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> u, Albero a) {	//da testare*****
+template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {	//da testare*****
 	//pre: alberi non vuoti, u appartiene all'albero
 	//post: l'albero in output è ottenuto aggiungendo l'albero a
-	//      la cui radice r è il nuovo primofiglio di u
+	//      la cui radice r e' il nuovo primofiglio di u
 
 	if (!this->alberoVuoto() && !a.alberoVuoto()) {
-		//if(u esiste nell'albero corrente)
+		/*//if(u esiste nell'albero corrente)
 
-		/*codice esempio, al posto di this->radice() va messo
-		 * l'indirizzo del nodo u reale nell'albero*/
-		NodoAN<T> *temp = this->radice();
-		a.albero->primoFiglio->padre = temp;
+		a.albero->primoFiglio->padre = u;
 		//se ci sono eventuali fratelli vengono aggiunti ad a
-		if (temp->primoFiglio != nullptr) {
+		if (u->primoFiglio != nullptr) {
 			a.albero->primoFiglio->fratello = new NodoAN<T>();
-			a.albero->primoFiglio->fratello = temp->primoFiglio;
+			a.albero->primoFiglio->fratello = u->primoFiglio;
 		}
-		temp->primoFiglio = a.albero->primoFiglio;
-		/*aggiornare poi tutti i livelli di quel sotto albero*/
-		a.albero->primoFiglio->livello = temp->livello + 1;
+		u->primoFiglio = a.albero->primoFiglio;
+		//aggiornare poi tutti i livelli di quel sotto albero
+		a.albero->primoFiglio->livello = u->livello + 1;
+		*/
+		//a.albero->primoFiglio->padre = u;
+		if(u->primoFiglio==nullptr){
+			u->primoFiglio = new NodoAN<T>();
+			u->primoFiglio = a.albero->primoFiglio;
+			u->primoFiglio->padre = u;
+		}
+
 	}
 }
 

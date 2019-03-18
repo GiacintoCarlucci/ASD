@@ -182,7 +182,6 @@ int main(void) {
 	std::cout << "albero 'alb' vuoto: ";
 	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
 
-	//TODO: creare costruttore nodo
 	NodoAN<int> u;
 	u.elemento = 5;
 
@@ -210,11 +209,6 @@ int main(void) {
 			std::cout << "nessun fratello di u\n" :
 			std::cout << "elemento del fratello: "
 					<< alb.succFratello(u)->elemento << "\n";
-	/*Albero<int> a;
-	 a.insRadice(u);
-	 alb.insSottoAlberoFiglio(u, a);
-	 std::cout<<alb.radice()->elemento;
-	 std::cout<<alb.radice()->primoFiglio->elemento; //errore*/
 
 	/*creo il seguente albero:
 	 *     1
@@ -222,24 +216,75 @@ int main(void) {
 	 *     6  7 8
 	 */
 
-	Albero<int> Albero;
-	Albero.insRadice(1);
-	Albero.insFiglio(Albero.radice(),5);
-	Albero.insFiglio(Albero.radice()->primoFiglio,8);
-	Albero.insFiglio(Albero.radice()->primoFiglio,7);
-	Albero.insFiglio(Albero.radice(),4);
-	Albero.insFiglio(Albero.radice()->primoFiglio,6);
-	Albero.insFiglio(Albero.radice(),3);
+	Albero<int> albero;
+	albero.insRadice(1);
+	albero.insFiglio(albero.radice(),5);
+	albero.insFiglio(albero.radice()->primoFiglio,8);
+	albero.insFiglio(albero.radice()->primoFiglio,7);
+	albero.insFiglio(albero.radice(),4);
+	albero.insFiglio(albero.radice()->primoFiglio,6);
+	albero.insFiglio(albero.radice(),3);
 
-	//si blocca se provo a stampare un nullptr
-	std::cout<<Albero.radice()->elemento<<std::endl;//1
-	std::cout<<Albero.radice()->primoFiglio->elemento<<std::endl;//3
-	std::cout<<Albero.radice()->primoFiglio->fratello->elemento<<std::endl;//4
-	std::cout<<Albero.radice()->primoFiglio->fratello->primoFiglio->elemento<<std::endl;//6
-	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//5
-	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->elemento<<std::endl;//7
-	std::cout<<Albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
+	//stampa (si blocca se provo a stampare un nullptr)
+	std::cout<<"stampa di albero\n";
+	std::cout<<albero.radice()->elemento<<std::endl;//1
+	std::cout<<albero.radice()->primoFiglio->elemento<<std::endl;//3
+	std::cout<<albero.radice()->primoFiglio->fratello->elemento<<std::endl;//4
+	std::cout<<albero.radice()->primoFiglio->fratello->primoFiglio->elemento<<std::endl;//6
+	std::cout<<albero.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//5
+	std::cout<<albero.radice()->primoFiglio->fratello->fratello->primoFiglio->elemento<<std::endl;//7
+	std::cout<<albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
 
 
+	/*creo il seguente albero:
+	 *       9
+	 *   10  12  13
+	 * 20 30
+	 */
+	Albero<int> alberoB;
+	alberoB.insRadice(9);
+	alberoB.insFiglio(alberoB.radice(),13);
+	alberoB.insFiglio(alberoB.radice(),12);
+	alberoB.insFiglio(alberoB.radice(),10);
+	alberoB.insFiglio(alberoB.radice()->primoFiglio,30);
+	alberoB.insFiglio(alberoB.radice()->primoFiglio,20);
+
+	//stampa
+	std::cout<<"stampa di alberoB\n";
+	std::cout<<alberoB.radice()->elemento<<std::endl;//9
+	std::cout<<alberoB.radice()->primoFiglio->elemento<<std::endl;//10
+	std::cout<<alberoB.radice()->primoFiglio->primoFiglio->elemento<<std::endl;//20
+	std::cout<<alberoB.radice()->primoFiglio->primoFiglio->fratello->elemento<<std::endl;//30
+	std::cout<<alberoB.radice()->primoFiglio->fratello->elemento<<std::endl;//12
+	std::cout<<alberoB.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//13
+
+	/*ora provo a fondere i due alberi inserendo 'alberoB' come figlio
+	 *del nodo '3' di 'albero', avendo in output il seguente albero:
+	 *
+	 *                  1
+	 *         3        4         5
+	 *         9        6        7 8
+	 *     10  12  13
+	 *   20 30
+	 */
+
+	//stampa
+	albero.insSottoAlberoFiglio(albero.radice()->primoFiglio,alberoB);
+	std::cout<<"stampa del sotto albero inserito\n";
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->elemento<<std::endl;//3->primofiglio (9)
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->primoFiglio->elemento<<std::endl;
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->primoFiglio->primoFiglio->elemento<<std::endl;
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->primoFiglio->primoFiglio->fratello->elemento<<std::endl;
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->primoFiglio->fratello->elemento<<std::endl;
+	std::cout<<albero.radice()->primoFiglio->primoFiglio->primoFiglio->fratello->fratello->elemento<<std::endl;
+
+	//stampa
+	std::cout<<"stampa di alberoB dopo l'inserimento in albero\n";
+		std::cout<<alberoB.radice()->elemento<<std::endl;//9
+		std::cout<<alberoB.radice()->primoFiglio->elemento<<std::endl;//10
+		std::cout<<alberoB.radice()->primoFiglio->primoFiglio->elemento<<std::endl;//20
+		std::cout<<alberoB.radice()->primoFiglio->primoFiglio->fratello->elemento<<std::endl;//30
+		std::cout<<alberoB.radice()->primoFiglio->fratello->elemento<<std::endl;//12
+		std::cout<<alberoB.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//13
 	return 0;
 }
