@@ -21,6 +21,13 @@ struct NodoAN {
 	}
 };
 
+//Overloading di << per stampare un nodo
+template<typename T>
+std::ostream &operator<<(std::ostream &output, const NodoAN<T> &n) {
+	output << "{" << n.elemento << "," << n.livello << "}";
+	return output;
+}
+
 template<class T>
 class Albero {
 public:
