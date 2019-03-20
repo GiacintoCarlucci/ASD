@@ -265,18 +265,26 @@ template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u,
 
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
 	if (!this->alberoVuoto()) {
+		//se il nodo passato come parametro è una radice allora la stampa
 		if (u->padre == this->albero)
 			std::cout << *u;
+		//se ha figli
 		if (u->primoFiglio != nullptr) {
 			u = u->primoFiglio;
+			//serve per essere sicuri che tutti i livelli siano corretti (magari poi fare una funz apposita)
 			u->livello = u->padre->livello + 1;
+			//stampa il figlio
 			std::cout << *u;
+			//richiama la stampa sul figlio (DFS)
 			this->stampaAlbero(u);
+			//se ha fratelli
 			if (u->fratello != nullptr) {
 				while (u->fratello != nullptr) {
 					u = u->fratello;
 					u->livello = u->padre->livello + 1;
+					//stampa i fratelli
 					std::cout << *u;
+					//richiama la stampa sui fratelli
 					this->stampaAlbero(u);
 				}
 			}
