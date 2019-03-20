@@ -43,7 +43,7 @@ public:
 	void insFiglio(NodoAN<T>*, T);
 	void insFratello(NodoAN<T>*, T);
 	void insSottoAlberoFiglio(NodoAN<T>*, Albero);
-	void insSottoAlberoFratello(NodoAN<T>, Albero);
+	void insSottoAlberoFratello(NodoAN<T>*, Albero);
 	void cancSottoAlbero(NodoAN<T>);
 
 private:
@@ -226,6 +226,22 @@ template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {
 
 	}
 	//bisogna aggiornare i livelli dell'albero inserito
+}
+
+template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u, Albero a) {
+	if (!this->alberoVuoto() && !a.alberoVuoto()) {
+		if(u->fratello==nullptr){
+			u->fratello = new NodoAN<T>();
+			u->fratello = a.albero->primoFilgio;
+			u->fratello->padre=u->padre;
+		}else{
+			NodoAN<T> *frat = u->fratello;
+			u->fratello = new NodoAN<T>();
+			u->fratello=a.albero->primoFiglio;
+			u->fratello->padre=u->padre;
+			u->fratello->fratello=frat;
+		}
+	}
 }
 
 #endif /* ALBERO_H_ */
