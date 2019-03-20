@@ -19,6 +19,15 @@ struct NodoAN {
 		 delete fratello;
 		 delete padre;*/
 	}
+
+	NodoAN<T>& operator=(const NodoAN<T> &rhs) {
+		elemento = rhs.elemento;
+		livello = rhs.livello;
+		padre = rhs.padre;
+		primoFiglio = rhs.primoFiglio;
+		fratello = rhs.fratello;
+		return *this;
+	}
 };
 
 //Overloading di << per stampare un nodo
@@ -52,6 +61,8 @@ public:
 	void insSottoAlberoFiglio(NodoAN<T>*, Albero);
 	void insSottoAlberoFratello(NodoAN<T>*, Albero);
 	void cancSottoAlbero(NodoAN<T>);
+
+	void stampaAlbero(NodoAN<T>*);
 
 private:
 	NodoAN<T> * albero;
@@ -109,7 +120,7 @@ template<class T> bool Albero<T>::ultimoFratello(NodoAN<T> u) const {
 		//if (esiste u)
 		if (u.padre != nullptr) {
 			if (u.fratello == nullptr) {
-				//se l'albero che stiamo analizzando � composto dalla sola radice (u non  ha padre):
+				//se l'albero che stiamo analizzando e' composto dalla sola radice (u non  ha padre):
 				if (u.padre == this->radice()) {
 					if (u.livello == 0 && u.padre->livello == 0) {
 						return true;
@@ -194,7 +205,7 @@ template<class T> void Albero<T>::insRadice(T e) {
 }
 
 template<class T> void Albero<T>::insFiglio(NodoAN<T> *u, T e) {
-	if (!this->alberoVuoto() && u!= nullptr) {
+	if (!this->alberoVuoto() && u != nullptr) {
 		if (u->primoFiglio == nullptr) {
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio->padre = u;
@@ -213,17 +224,17 @@ template<class T> void Albero<T>::insFratello(NodoAN<T> *u, T e) {
 
 }
 
-template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {	//da testare*****
+template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {//da testare*****
 	//pre: alberi non vuoti, u appartiene all'albero
 	//post: l'albero in output è ottenuto aggiungendo l'albero a
 	//      la cui radice r e' il nuovo primofiglio di u
 
 	if (!this->alberoVuoto() && !a.alberoVuoto()) {
-		if(u->primoFiglio==nullptr){
+		if (u->primoFiglio == nullptr) {
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio = a.albero->primoFiglio;
 			u->primoFiglio->padre = u;
-		}else{
+		} else {
 			NodoAN<T> *frat = u->primoFiglio;
 			u->primoFiglio = new NodoAN<T>();
 			u->primoFiglio = a.albero->primoFiglio;
@@ -235,20 +246,41 @@ template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {
 	//bisogna aggiornare i livelli dell'albero inserito
 }
 
-template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u, Albero a) {
+template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u,
+		Albero a) {
 	if (!this->alberoVuoto() && !a.alberoVuoto()) {
-		if(u->fratello==nullptr){
+		if (u->fratello == nullptr) {
 			u->fratello = new NodoAN<T>();
 			u->fratello = a.albero->primoFilgio;
-			u->fratello->padre=u->padre;
-		}else{
+			u->fratello->padre = u->padre;
+		} else {
 			NodoAN<T> *frat = u->fratello;
 			u->fratello = new NodoAN<T>();
-			u->fratello=a.albero->primoFiglio;
-			u->fratello->padre=u->padre;
-			u->fratello->fratello=frat;
+			u->fratello = a.albero->primoFiglio;
+			u->fratello->padre = u->padre;
+			u->fratello->fratello = frat;
 		}
 	}
 }
 
+template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
+	if (!this->alberoVuoto()) {
+		if (u->padre == this->albero)
+			std::cout << *u;
+		if (u->primoFiglio != nullptr) {
+			u = u->primoFiglio;
+			u->livello = u->padre->livello + 1;
+			std::cout << *u;
+			this->stampaAlbero(u);
+			if (u->fratello != nullptr) {
+				while (u->fratello != nullptr) {
+					u = u->fratello;
+					u->livello = u->padre->livello + 1;
+					std::cout << *u;
+					this->stampaAlbero(u);
+				}
+			}
+		}
+	}
+}
 #endif /* ALBERO_H_ */
