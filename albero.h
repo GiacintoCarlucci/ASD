@@ -63,6 +63,7 @@ public:
 	void cancSottoAlbero(NodoAN<T>);
 
 	void stampaAlbero(NodoAN<T>*);
+	void aggiornaLivelli(NodoAN<T>*);
 
 private:
 	NodoAN<T> * albero;
@@ -243,7 +244,7 @@ template<class T> void Albero<T>::insSottoAlberoFiglio(NodoAN<T> *u, Albero a) {
 		}
 
 	}
-	//bisogna aggiornare i livelli dell'albero inserito
+	this->aggiornaLivelli(u);
 }
 
 template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u,
@@ -261,6 +262,7 @@ template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u,
 			u->fratello->fratello = frat;
 		}
 	}
+	this->aggiornaLivelli(u);
 }
 
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
@@ -291,4 +293,22 @@ template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
 		}
 	}
 }
+
+template<class T> void Albero<T>::aggiornaLivelli(NodoAN<T> *u){
+	if (!this->alberoVuoto()) {
+		if (u->primoFiglio != nullptr) {
+			u=u->primoFiglio;
+			u->livello = u->padre->livello + 1;
+			this->aggiornaLivelli(u);
+			if(u->fratello != nullptr){
+				while(u->fratello != nullptr){
+					u=u->fratello;
+					u->livello=u->padre->livello + 1;
+					this->aggiornaLivelli(u);
+				}
+			}
+		}
+	}
+}
+
 #endif /* ALBERO_H_ */
