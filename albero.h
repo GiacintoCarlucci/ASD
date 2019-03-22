@@ -14,10 +14,13 @@ struct NodoAN {
 	NodoAN<T> * fratello = nullptr;
 
 	~NodoAN() {
-		//scrivere il distruttore, cosï¿½ termina inaspettatamente
-		/*delete primoFiglio;
-		 delete fratello;
-		 delete padre;*/
+		if (primoFiglio)
+			delete primoFiglio;
+		primoFiglio = nullptr;
+		if (fratello)
+			delete fratello;
+		fratello = nullptr;
+
 	}
 
 	NodoAN<T>& operator=(const NodoAN<T> &rhs) {
@@ -60,7 +63,7 @@ public:
 	void insFratello(NodoAN<T>*, T);
 	void insSottoAlberoFiglio(NodoAN<T>*, Albero);
 	void insSottoAlberoFratello(NodoAN<T>*, Albero);
-	void cancSottoAlbero(NodoAN<T>);
+	void cancSottoAlbero(NodoAN<T>*);
 
 	void stampaAlbero(NodoAN<T>*);
 	void aggiornaLivelli(NodoAN<T>*);
@@ -78,10 +81,10 @@ template<class T> Albero<T>::Albero() {
 	albero->primoFiglio = albero;
 }
 
-template<class T> Albero<T>::~Albero() {
-	//man mano che scorro l'albero cancello i nodi, ma dovrei partire dal basso per non perdere i riferimenti?
-	//ho un distruttore in NodoAN che dovrebbe cancellare ricorsivamente tutto l'albero
-	//delete albero;
+template<class T> Albero<T>::~Albero() {//da rivedere
+	/*this->cancSottoAlbero(this->albero);
+	delete albero;
+	albero=nullptr;*/
 }
 
 template<class T> bool Albero<T>::alberoVuoto() const {
@@ -265,6 +268,18 @@ template<class T> void Albero<T>::insSottoAlberoFratello(NodoAN<T> *u,
 	this->aggiornaLivelli(u);
 }
 
+template<class T> void Albero<T>::cancSottoAlbero(NodoAN<T>* u) {
+	if (u != nullptr) {
+		if (u->fratello != nullptr) {
+			this->cancSottoAlbero(u->fratello);
+		}
+		if (u->primoFiglio != nullptr) {
+			this->cancSottoAlbero(u->primoFiglio);
+		}
+		delete u;
+	}
+}
+
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
 	if (!this->alberoVuoto()) {
 		//se il nodo passato come parametro è una radice allora la stampa
@@ -294,16 +309,16 @@ template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
 	}
 }
 
-template<class T> void Albero<T>::aggiornaLivelli(NodoAN<T> *u){
+template<class T> void Albero<T>::aggiornaLivelli(NodoAN<T> *u) {
 	if (!this->alberoVuoto()) {
 		if (u->primoFiglio != nullptr) {
-			u=u->primoFiglio;
+			u = u->primoFiglio;
 			u->livello = u->padre->livello + 1;
 			this->aggiornaLivelli(u);
-			if(u->fratello != nullptr){
-				while(u->fratello != nullptr){
-					u=u->fratello;
-					u->livello=u->padre->livello + 1;
+			if (u->fratello != nullptr) {
+				while (u->fratello != nullptr) {
+					u = u->fratello;
+					u->livello = u->padre->livello + 1;
 					this->aggiornaLivelli(u);
 				}
 			}

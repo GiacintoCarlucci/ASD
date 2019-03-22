@@ -288,5 +288,6 @@ int main(void) {
 		std::cout<<alberoB.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//13
 
 		albero.stampaAlbero(albero.radice());
+
 	return 0;
 }
