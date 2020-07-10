@@ -57,35 +57,113 @@ item<T> largest(std::vector<T> v){
     return max;
 }
 
-// template<typename T>
-// void remove(std::vector<T> v, T k){
-//     // se l'array non è vuoto
-//     if(!v.empty()){
-//         // itero nell'array
-//         for(typename std::vector<T>::iterator it = v.begin(); it != v.end(); it++){
-//             // se trovo l'elemento da rimuovere
-//             if(*it == k){
-//                 // shifto a sinistra a partire dalla posizione corrente
-//                 for(typename std::vector<T>::iterator inner_it = it; inner_it != v.end(); inner_it++){
-//                     *inner_it =  *++it;
-//                 }
-//                 *v.end() = 0;
-//                 return;
-//             }
-//         }
-//     }
-// }
+template<typename T>
+std::vector<T> remove(std::vector<T> v, T k){
+    std::vector<T> temp;
+    // se l'array non è vuoto
+    if(!v.empty()){
+        // itero nell'array
+        for(typename std::vector<T>::iterator it = v.begin(); it < v.end(); it++){
+            // se trovo l'elemento lo salto
+            if(*it == k){  *++it; }
+            // inserisco nell'array temporaneo
+            temp.push_back(*it);
+        }
+        // alla fine inserisco 0
+        temp.push_back(0);
+    }
+    // restituisco l'array shiftato
+    return temp;
+}
+
+/*
+    1: crescente
+    2: decrescente
+    3: costante
+    -1: non ordinato
+*/
+template <typename T>
+int ordering(std::vector<T> v){
+    if(!v.empty()){
+        if(v.size() == 1){return -1;}
+        if (v.size() == 2){
+            if(*v.begin() < *(v.begin() + 1)){return 1;}
+            if(*v.begin() > *(v.begin() + 1)){return 2;}
+            if(*v.begin() == *(v.begin() + 1)){return 3;}
+        }
+
+        int ordering = -1;
+        T first = *v.begin();
+        T second = *(v.begin() + 1);
+        if(v.size() > 2){
+            if(first < second){ordering = 1;}
+            if(first > second){ordering = 2;}
+            if(first == second){ordering = 3;}
+        }
+
+        T last = second;
+        for(typename std::vector<T>::iterator it = v.begin() + 2; it < v.end(); it++){
+            if (last < *it && ordering == 1){
+                last = *it;
+                continue;
+            }else{
+                if (last > *it && ordering == 2){
+                    last = *it;
+                    continue;
+                }else{
+                    if (last == *it && ordering == 3){
+                        last = *it;
+                        continue;
+                    }else{
+                        return -1;
+                    }
+                }
+            }
+        }
+        return ordering;
+    }
+    return -1;
+}
+
+template<typename T>
+std::vector<T> reverse(std::vector<T> v){
+    std::vector<T> temp;
+    // se l'array non è vuoto
+    if(!v.empty()){
+        // itero al contrario nell'array
+        for(typename std::vector<T>::iterator it = v.end() - 1; it >= v.begin(); it--){
+            // inserisco nell'array temporaneo
+            temp.push_back(*it);
+        }
+    }
+    // restituisco l'array invertito
+    return temp;
+}
+
+template<typename T>
+void print(std::vector<T> v){
+    std::cout << "{ ";
+    for (typename std::vector<T>::iterator it = v.begin(); it < v.end(); it++){
+        std::cout << *it << ' ';
+    }
+    std::cout << "}" << '\n';
+}
 
 int main(void) {
     std::vector<int> array = {1,2,3,4,5,6,7,8,9,10};
-    std::cout << "array = {1,2,3,4,5,6,7,8,9,10}" << '\n';
-
+    print(array);
     int k = 7;
+    std::cout << "ordinamento array: " << ordering(array) << '\n';
     std::cout << "il numero di elementi dell'array maggiori di "<<k<<" e': "<<greaterThan(array,k)<< '\n';
     std::cout << k <<" presente nell'array: "<< member(array,k) <<'\n';
-    std::cout << "l'elemento piu' grande dell'array e': " << largest(array).value<< '\n';
+    std::cout << "l'elemento piu' grande dell'array e': " << largest(array).value << '\n';
     std::cout << "rimozione di "<< k <<" dall'array..." << '\n';
-    remove(array,k);
-    std::cout << array[0] << ", " << array[1] << ", " << array[2] << ", " << array[3] << ", " << array[4] << ", " << array[5] << ", " << array[6] << ", " << array[7] << ", " << array[8] << ", " << array[9] << '\n';
+    array = remove(array,k);
+    print(array);
+    std::cout << "ordinamento array dopo la rimozione: " << ordering(array) << '\n';
+    std::cout << "inversione dell'array..." << '\n';
+    array = reverse(array);
+    print(array);
+
     return 0;
 }
