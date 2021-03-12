@@ -10,8 +10,8 @@
 #include "albero.h"
 
 int main(void) {
-	/*Lista
-	 *
+	
+	 
 	 std::cout<<"creazione della lista...\n";
 	 Lista<int> l;
 	 std::cout<<"la lista l è vuota: ";
@@ -42,7 +42,7 @@ int main(void) {
 
 	 l.stampaLista();
 	 l.stampaNodo(indice);
-	 */
+	 
 
 	/*Grafo
 	 *
@@ -178,6 +178,7 @@ int main(void) {
 	 D.stampa();
 	 */
 
+  /*
 	Albero<int> alb;
 	std::cout << "albero 'alb' vuoto: ";
 	alb.alberoVuoto() ? std::cout << "si\n" : std::cout << "no\n";
@@ -210,11 +211,11 @@ int main(void) {
 			std::cout << "elemento del fratello: "
 					<< alb.succFratello(u)->elemento << "\n";
 
-	/*creo il seguente albero:
-	 *     1
-	 * 3   4   5
-	 *     6  7 8
-	 */
+	//creo il seguente albero:
+	//     1
+	// 3   4   5
+	//     6  7 8
+	///
 
 	Albero<int> albero;
 	albero.insRadice(1);
@@ -236,11 +237,11 @@ int main(void) {
 	std::cout<<albero.radice()->primoFiglio->fratello->fratello->primoFiglio->fratello->elemento<<std::endl;//8
 
 
-	/*creo il seguente albero:
-	 *       9
-	 *   10  12  13
-	 * 20 30
-	 */
+	//creo il seguente albero:
+	//       9
+	//   10  12  13
+	// 20 30
+	///
 	Albero<int> alberoB;
 	alberoB.insRadice(9);
 	alberoB.insFiglio(alberoB.radice(),13);
@@ -258,15 +259,15 @@ int main(void) {
 	std::cout<<alberoB.radice()->primoFiglio->fratello->elemento<<std::endl;//12
 	std::cout<<alberoB.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//13
 
-	/*ora provo a fondere i due alberi inserendo 'alberoB' come figlio
-	 *del nodo '3' di 'albero', avendo in output il seguente albero:
-	 *
-	 *                  1
-	 *         3        4         5
-	 *         9        6        7 8
-	 *     10  12  13
-	 *   20 30
-	 */
+	//ora provo a fondere i due alberi inserendo 'alberoB' come figlio
+	//del nodo '3' di 'albero', avendo in output il seguente albero:
+	//
+	//                  1
+	//         3        4         5
+	//         9        6        7 8
+	//     10  12  13
+	//   20 30
+	///
 
 	//stampa
 	albero.insSottoAlberoFiglio(albero.radice()->primoFiglio,alberoB);
@@ -288,6 +289,7 @@ int main(void) {
 		std::cout<<alberoB.radice()->primoFiglio->fratello->fratello->elemento<<std::endl;//13
 
 		albero.stampaAlbero(albero.radice());
+  */
 
 	return 0;
 }
