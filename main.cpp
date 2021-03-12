@@ -43,6 +43,10 @@ int main(void) {
 	 l.stampaLista();
 	 l.stampaNodo(indice);
 	 
+   std::cout<<"costruttore di copia su lista l2...\n";
+   Lista<int> l2(l);
+   std::cout<<"stampa di l2: \n";
+   l2.stampaLista();
 
 	/*Grafo
 	 *

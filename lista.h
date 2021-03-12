@@ -1,3 +1,5 @@
+#include <iostream>
+
 #ifndef _LISTAP_H_
 #define _LISTAP_H_
 
@@ -68,6 +70,19 @@ template<class T> Lista<T>::Lista(void) {
 	lista = new Nodo<T>;
 	lista->succ = lista;
 	lista->prec = lista;
+}
+
+template<class T> Lista<T>::Lista(const Lista<T> &copia){
+  lista = new Nodo<T>;
+  lista->succ = lista;
+  lista->prec = lista;
+  posizione p = copia.ultimoLista();
+  posizione temp = this->primoLista();
+  while(!copia.fineLista(p)){
+    tipoelem elemento = copia.leggiLista(p);
+    insLista(elemento,temp);
+    p = copia.precLista(p);
+  }
 }
 
 template<class T> Lista<T>::~Lista(void) {
