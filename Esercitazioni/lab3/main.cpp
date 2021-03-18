@@ -48,7 +48,7 @@ int main(void){
   
   std::cout<<"prodotto delle matrici A e B:"<<std::endl;
 
-  Matrice AB(2,2);
+  Matrice AB(0,0);
 
   AB = A.prodotto(B);
   AB.stampaMatrice();
