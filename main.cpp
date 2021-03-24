@@ -26,8 +26,9 @@ int main(void) {
 	 std::cout<<"aggiunta di un nodo...\n";
 	 l.insLista(2,indice=l.succLista(indice));
 	 std::cout<<"abbiamo appena inserito: "<<l.leggiLista(indice)<<"\n";
-	 std::cout<<"aggiunta di un nodo...\n";
 	 l.insLista(3,indice=l.succLista(indice));
+	 std::cout<<"aggiunta di un nodo...\n";
+	 l.insLista(2,indice=l.succLista(indice));
 	 std::cout<<"abbiamo appena inserito: "<<l.leggiLista(indice)<<"\n";
 
 	 std::cout<<"la lista l è vuota: ";
@@ -47,7 +48,15 @@ int main(void) {
    Lista<int> l2(l);
    std::cout<<"stampa di l2: \n";
    l2.stampaLista();
-
+   std::cout<<"lunghezza di l2: "<<l2.contaLista()<<"\n";
+   std::cout<<"inversione l2...\n";
+   l2.invertiLista();
+   l2.stampaLista();
+   if(l.palindroma()){
+    std::cout<<"l palindroma\n";
+   }else{
+    std::cout<<"l non palindroma\n";
+   }
 	/*Grafo
 	 *
 	 Grafo<std::string> G;

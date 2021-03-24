@@ -47,11 +47,13 @@ public:
 	bool esisteLista(tipoelem) const;
 	posizione trovaLista(tipoelem) const;
 	int contaLista() const;
+  bool palindroma() const;
 
 	/* Modificatori*/
 	void scriviLista(tipoelem, posizione);
 	void insLista(tipoelem, posizione&);
 	void cancLista(posizione);
+  void invertiLista();
 
 	/* Di Servizio*/
 	void stampaLista();
@@ -152,6 +154,33 @@ template<class T> int Lista<T>::contaLista() const {
 	return cont;
 }
 
+template<class T> bool Lista<T>::palindroma() const{
+  Lista::posizione testa = this->primoLista();
+  Lista::posizione coda = this->ultimoLista();
+  int cont = this->contaLista();
+  int meta = 0;
+  if(cont > 2){
+    if(cont%2 == 0){ meta = cont/2; }
+    else{ meta = (cont - 1)/2; }
+    for(int i = 1; i <= meta; i++){
+      if(this->leggiLista(testa) == this->leggiLista(coda)){
+        testa = this->succLista(testa);
+        coda = this->precLista(coda);
+      }else{
+        return false;
+      }
+    }
+    return true;
+  }else{
+    if(cont == 2){
+      if(this->leggiLista(testa) == this->leggiLista(coda)){
+        return true;
+      }
+    }
+    return false;
+  }
+}
+
 template<class T> void Lista<T>::scriviLista(tipoelem a, Lista::posizione p) {
 	if (p != lista) { //il primo nodo deve fungere solo da puntatore
 		p->elemento = a;
@@ -178,6 +207,21 @@ template<class T> void Lista<T>::cancLista(Lista::posizione p) {
 		p = p->succ;
 		delete (temp);
 	}
+}
+
+template<class T> void Lista<T>::invertiLista(void){
+  if (!this->listaVuota()){
+    Lista::posizione indice;
+    Lista::posizione temp;
+    for(indice = this->primoLista(); (!this->fineLista(indice)); indice = this->precLista(indice)){
+      temp = indice->prec;
+      indice->prec = indice->succ;
+      indice->succ = temp;
+    }
+    temp = lista->prec;
+    lista->prec = lista->succ;
+    lista->succ = temp;
+  }
 }
 
 template<class T> void Lista<T>::stampaLista() {
