@@ -20,6 +20,14 @@ struct Vertex {
 	bool operator==(const Vertex<T>& rhs) const {
 		return label == rhs.label;
 	}
+	//Overloading dell'operatore <= per confrontare due tipi Vertex
+	bool operator<=(const Vertex<T>& rhs) const {
+		return label <= rhs.label;
+	}
+	//Overloading dell'operatore >= per confrontare due tipi Vertex
+	bool operator>=(const Vertex<T>& rhs) const {
+		return label >= rhs.label;
+	}
 
 };
 
@@ -121,25 +129,22 @@ template<class T> void Grafo<T>::insNodo(Vertex<T> u) {
 }
 
 template<class T> void Grafo<T>::insArco(Vertex<T> u, Vertex<T> v) {
-
-	//se i due nodi già esistono
-	if (this->esisteNodo(u) && this->esisteNodo(v)) {
-		typename Lista<Vertex<T>>::posizione indiceU = Grafo::grafo->trovaLista(
-				u);
-		//se adj è vuoto e stiamo inserendo il primo adiacente creo una nuova lista
-		if (indiceU->elemento.adj == nullptr) {
-			indiceU->elemento.adj = new Lista<Vertex<T>>();
-		}
-		typename Lista<Vertex<T>>::posizione indiceV =
-				indiceU->elemento.adj->primoLista()->succ;
-		indiceU->elemento.adj->insLista(v, indiceV);
-	}
+  //se i due nodi già esistono
+  if (this->esisteNodo(u) && this->esisteNodo(v)) {
+    typename Lista<Vertex<T>>::posizione indiceU = Grafo::grafo->trovaLista(u);
+    //se adj è vuoto e stiamo inserendo il primo adiacente creo una nuova lista
+    if (indiceU->elemento.adj == nullptr) {
+      indiceU->elemento.adj = new Lista<Vertex<T>>();
+    }
+    typename Lista<Vertex<T>>::posizione indiceV = indiceU->elemento.adj->primoLista();
+    indiceU->elemento.adj->insListaOrdinata(v,indiceV);
+  }
 }
 
 template<class T> void Grafo<T>::cancNodo(Vertex<T> u) {
-	if (this->esisteNodo(u)) {
-		typename Lista<Vertex<T>>::posizione indice = Grafo::grafo->trovaLista(
-				u);
+  if (this->esisteNodo(u)) {
+    typename Lista<Vertex<T>>::posizione indice = Grafo::grafo->trovaLista(
+        u);
 		Grafo::grafo->leggiLista(indice).adj->~Lista();
 		Grafo::grafo->cancLista(indice);
 	}
@@ -174,44 +179,41 @@ template<class T> void Grafo<T>::stampaGrafo() {
 }
 
 template<class T> void Grafo<T>::BFS(Vertex<T> r) {
-	typename Lista<Vertex<T>>::posizione indice;
-	std::vector<Vertex<T>> visitati;
+  typename Lista<Vertex<T>>::posizione indice;
+  std::vector<Vertex<T>> visitati;
+  Coda<Vertex<T>> Q;
+  Q.inCoda(Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)));
+  visitati.push_back(r);
+  while(!Q.codaVuota()){
+    Vertex<T> u = Q.leggiCoda();
+    std::cout<<u<<" ";
+    for (indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->primoLista();
+        !Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->fineLista(indice);
+        indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->succLista(indice)){
 
-	//std::queue<Vertex<T>> Q;
-	Coda<Vertex<T>> Q;
-	//Q.push(Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)));
-	Q.inCoda(Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)));
-	visitati.push_back(r);
-	while(!Q.codaVuota()){
-		Vertex<T> u = Q.leggiCoda();
-		std::cout<<u<<" ";
-		for (indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->primoLista();
-				!Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->fineLista(indice);
-				indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(u)).adj->succLista(indice)){
-
-			Vertex<T> v = u.adj->leggiLista(indice);
-			if(!(std::find(visitati.begin(), visitati.end(),v) != visitati.end())){
-				visitati.push_back(v);
-				Q.inCoda(v);
-			}
-		}
-		Q.fuoriCoda();
-	}
+      Vertex<T> v = u.adj->leggiLista(indice);
+      if(!(std::find(visitati.begin(), visitati.end(),v) != visitati.end())){
+        visitati.push_back(v);
+        Q.inCoda(v);
+      }
+    }
+    Q.fuoriCoda();
+  }
 }
 
 template<class T> void Grafo<T>::DFS(Vertex<T> r,std::vector<Vertex<T>> visitati) {
-	typename Lista<Vertex<T>>::posizione indice;
-	visitati.push_back(r);
-	std::cout<<r<<" ";
-		for (indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->primoLista();
-			!Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->fineLista(indice);
-			indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->succLista(indice)){
+  typename Lista<Vertex<T>>::posizione indice;
+  visitati.push_back(r);
+  std::cout<<r<<" ";
+  for (indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->primoLista();
+      !Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->fineLista(indice);
+      indice = Grafo::grafo->leggiLista(Grafo::grafo->trovaLista(r)).adj->succLista(indice)){
 
-			Vertex<T> v = r.adj->leggiLista(indice);
-			if(!(std::find(visitati.begin(), visitati.end(),v) != visitati.end())){
-				this->DFS(v,visitati);
-			}
-		}
+    Vertex<T> v = r.adj->leggiLista(indice);
+    if(!(std::find(visitati.begin(), visitati.end(),v) != visitati.end())){
+      this->DFS(v,visitati);
+    }
+  }
 }
 
 #endif //_GRAFO_H_

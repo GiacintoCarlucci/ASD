@@ -52,6 +52,7 @@ public:
 	/* Modificatori*/
 	void scriviLista(tipoelem, posizione);
 	void insLista(tipoelem, posizione&);
+  void insListaOrdinata(tipoelem, posizione&);
 	void cancLista(posizione);
   void invertiLista();
 
@@ -198,15 +199,61 @@ template<class T> void Lista<T>::insLista(tipoelem a, Lista::posizione &p) {
 	p = temp;
 }
 
+template<class T> void Lista<T>::insListaOrdinata(tipoelem a, Lista::posizione &p) {
+  Lista::posizione indice = p;
+  // Se la lista è vuota
+  if(this->listaVuota()){
+    // Inserisco direttamente l'elemento
+    this->insLista(a,indice);
+  // Altrimenti se la lista è piena
+  }else{
+    // Per ogni elemento nella lista
+    for (indice; (!this->fineLista(indice));indice = this->succLista(indice)) {
+      // Se l'elemento da inserire è minore o uguale dell'elemento corrente
+      if(a <= this->leggiLista(indice)){
+        // Se l'elemento corrente non è l'ultimo della lista
+        if(!this->fineLista(this->succLista(indice))){
+          // Se l'elemento da inserire è maggiore o uguale all'elemento successivo
+          if(a >= this->leggiLista(this->succLista(indice))){
+            // Inserisco l'elemento in lista
+            this->insLista(a,indice);
+            break;
+          }
+        // Altrimenti se l'elemento da inserire è l'ultimo della lista
+        }else{
+          // Inserisco l'elemento in lista
+          this->insLista(a,indice);
+          break;
+        }
+      // Altrimenti se l'elemento da inserire è maggiore dell'elemento corrente
+      }else{
+        // Se l'elemento corrente non è l'ultimo della lista
+          if(!this->fineLista(this->succLista(indice))){
+            // Se l'elemento da inserire è minore o uguale all'elemento corrente
+            if(a <= this->leggiLista(this->succLista(indice))){
+              indice = this->succLista(indice);
+              this->insLista(a,indice);
+              break;
+            }
+          }else{
+              indice = this->succLista(indice);
+              this->insLista(a,indice);
+              break;
+          }
+      }
+    }
+  } 
+}
+
 template<class T> void Lista<T>::cancLista(Lista::posizione p) {
-	if (p != nullptr) {
-		Lista::posizione temp;
-		temp = p;
-		p->succ->prec = p->prec;
-		p->prec->succ = p->succ;
-		p = p->succ;
-		delete (temp);
-	}
+  if (p != nullptr) {
+    Lista::posizione temp;
+    temp = p;
+    p->succ->prec = p->prec;
+    p->prec->succ = p->succ;
+    p = p->succ;
+    delete (temp);
+  }
 }
 
 template<class T> void Lista<T>::invertiLista(void){

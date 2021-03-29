@@ -1,3 +1,4 @@
+#include <iostream>
 #ifndef _CODA_H_
 #define _CODA_H_
 
@@ -55,18 +56,31 @@ template<typename T> Coda<T>::Coda() {
 	fondo = nullptr;
 }
 
+// Copia
+template<typename T> Coda<T>::Coda(const Coda<T> &origine){
+  testa= nullptr;
+  fondo = nullptr;
+  NodoC<T> *tempNode = origine.testa; 
+  while(tempNode !=  nullptr){
+    this->inCoda(tempNode->elemento);
+    tempNode = tempNode->succ;
+  }
+}
+
 // Distruttore
 template<typename T> Coda<T>::~Coda() {
 	while (testa != nullptr) {
 		this->fuoriCoda();
 	}
 	delete testa;
-	delete fondo;
 }
 
 /* Osservatori*/
 template<typename T> bool Coda<T>::codaVuota() const {
-	return testa == nullptr;
+  if(testa == nullptr){
+    return true;
+  }
+	return false;
 }
 
 template<typename T> T Coda<T>::leggiCoda() const {
@@ -88,6 +102,7 @@ template<typename T> void Coda<T>::fuoriCoda() {
 		testa = testa->succ;
 		delete (tmp);
 	} else {
+    std::cout<<"fuorivuota\n";
 		return;
 	}
 }
@@ -111,16 +126,16 @@ template<typename T> void Coda<T>::inCoda(T elemento) {
 }
 
 template <typename T> void Coda<T>::stampaCoda(){
+  NodoC<T> *tempNode = testa; 
 	std::cout<<"[";
-	while(!this->codaVuota()){
-		std::cout<<this->leggiCoda();
-		this->fuoriCoda();
-		if (!this->codaVuota()){
-		      std::cout << ", ";
-		    }
-
+	while(tempNode != nullptr){
+		std::cout<<tempNode->elemento;
+    tempNode = tempNode->succ;
+    if (tempNode != nullptr){
+      std::cout << ", ";
+    }
 	}
-	std::cout<<"]";
+	std::cout<<"]"<<std::endl;
 }
 
 #endif // _CODA_H_

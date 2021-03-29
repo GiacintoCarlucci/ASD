@@ -11,7 +11,7 @@
 
 int main(void) {
 	
-	 
+	 /* 
 	 std::cout<<"creazione della lista...\n";
 	 Lista<int> l;
 	 std::cout<<"la lista l è vuota: ";
@@ -57,8 +57,8 @@ int main(void) {
    }else{
     std::cout<<"l non palindroma\n";
    }
-	/*Grafo
-	 *
+  */
+
 	 Grafo<std::string> G;
 	 Vertex<std::string> U, V, O,P;
 	 U.label = "U";
@@ -91,17 +91,78 @@ int main(void) {
 	 std::cout<<"\nVisita DFS:\n";
 	 std::vector<Vertex<std::string>> vet;
 	 G.DFS(O,vet);
-	 */
 
-	/*Coda
-	 *
+   std::cout<<std::endl;
+   std::cout<<"creo il seguente grafo:"<<std::endl;
+   std::cout<<"    1        6         "<<std::endl;
+   std::cout<<"   / \\      /         "<<std::endl;
+   std::cout<<"  2   4----5           "<<std::endl;
+   std::cout<<"   \\ /      \\        "<<std::endl;
+   std::cout<<"    3        7         "<<std::endl;
+   std::cout<<"   / \\                "<<std::endl;
+   std::cout<<"  8   9                "<<std::endl;
+
+	 Grafo<int> A;
+	 Vertex<int> a,b,c,d,e,f,g,h,i;
+   a.label = 1;
+   b.label = 2;
+   c.label = 3;
+   d.label = 4;
+   e.label = 5;
+   f.label = 6;
+   g.label = 7;
+   h.label = 8;
+   i.label = 9;
+
+   A.insNodo(a);
+   A.insNodo(b);
+   A.insNodo(c);
+   A.insNodo(d);
+   A.insNodo(e);
+   A.insNodo(f);
+   A.insNodo(g);
+   A.insNodo(h);
+   A.insNodo(i);
+
+   A.insArco(a,b);
+   A.insArco(b,a);
+   A.insArco(b,c);
+   A.insArco(c,b);
+   A.insArco(c,h);
+   A.insArco(h,c);
+   A.insArco(c,i);
+   A.insArco(i,c);
+   A.insArco(c,d);
+   A.insArco(d,c);
+   A.insArco(d,a);
+   A.insArco(a,d);
+   A.insArco(d,e);
+   A.insArco(e,d);
+   A.insArco(e,f);
+   A.insArco(f,e);
+   A.insArco(e,g);
+   A.insArco(g,e);
+
+   A.stampaGrafo(); 
+
+	 std::cout<<"\nVisita BFS:\n";
+	 A.BFS(a);
+	 std::cout<<"\nVisita DFS:\n";
+	 std::vector<Vertex<int>> vetA;
+	 A.DFS(a,vetA);
+  /*CODA
 	 Coda<int> C;
 	 C.inCoda(1);
 	 C.inCoda(2);
 	 C.inCoda(3);
 	 C.inCoda(4);
+   Coda<int> B(C);
+   std::cout<<"stampa C:\n";
 	 C.stampaCoda();
-	 */
+   std::cout<<"stampa B:\n";
+   B.stampaCoda();
+   B.stampaCoda();
+  */
 
 	/*Pila
 	 *
