@@ -246,13 +246,10 @@ template<class T> void Lista<T>::insListaOrdinata(tipoelem a, Lista::posizione &
 }
 
 template<class T> void Lista<T>::cancLista(Lista::posizione p) {
-  if (p != nullptr) {
-    Lista::posizione temp;
-    temp = p;
-    p->succ->prec = p->prec;
+  if (!listaVuota() && !fineLista(p)) {
     p->prec->succ = p->succ;
-    p = p->succ;
-    delete (temp);
+    p->succ->prec = p->prec;
+    delete (p);
   }
 }
 
