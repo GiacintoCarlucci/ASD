@@ -1,0 +1,110 @@
+LISTA---------------------------------------------------------------------------
+
+[ ][I primi n interi]
+
+  Si scriva una procedura ricorsiva di complessità ottima che, dato un intero
+  n >= 1, costruisca due liste L ed M tali che L = 1, 2, ..., n-1, n
+  ed M = n, n-1, ..., 2, 1.
+
+[ ][Epurazione]
+
+  Si scriva una procedura che, data una lista L di interi, restituisca un'altra
+  lista M che contenga solo gli elementi di L i cui valori non compaiono
+  esattamente due volte.
+  (es: se L = 5,7,3,2,2,1,2,3, allora M = 5,7,2,2,1,2).
+
+[ ][Pari e dispari]
+
+  Si scriva una procedura ricorsiva che data una lista L di interi, la modifichi
+  eliminando ogni elemento pari e replicando ogni elemento dispari tante volte
+  quanti sono gli elementi pari che lo precedono.
+  (es: se L = 4,6,7,3,2,5, allora si ha L = 7,7,7,3,3,3,5,5,5,5).
+
+ALBERO--------------------------------------------------------------------------
+
+[ ][Altezza]
+
+  L'altezza di un albero ordinato è il massimo livello delle sue foglie.
+  Si fornisca una funzione che calcoli in tempo ottimo l'altezza di un albero
+  ordinato T di n nodi.
+
+[ ][Cancella le foglie con somma k]
+
+  Dato un albero ordinato i coui nodi contengono valori interi, se ne vogliono
+  cancellare tutte le foglie per le quali il percorso radice-foglia ha somma
+  complessiva dei valori uguale a k. Fornire una procedura di complessità
+  ottima.
+
+[ ][Larghezza]
+
+  La larghezza di un albero ordinato è il numero massimo di nodi che stanno
+  tutti al medesimo livello. Si fornisca una funzione che calcoli in tempo
+  ottimo la larghezza di un albero ordinato T di n nodi.
+
+[ ][Visite]
+
+  Gli ordini di visita di un albero binario di 9 nodi sono i seguenti:
+  A,E,B,F,G,C,D,I,H (anticipato), 
+  B,G,C,F,E,H,I,D,A (posticipato),
+  B,E,G,F,C,A,D,H,I (simmetrico)
+  Si costruisca l'albero binario.
+
+[ ][Numero nodi per sottoalbero]
+
+  Dato un albero binario t non vuoto, si vuole memorizzare, in ciascun nodo u,
+  il numero di nodi che si trovano nel sottoalbero radicato in u.
+  Si fornisca un algoritmo lineare nel numero di nodi.
+
+[ ][Cancella foglie]
+
+  Dato un albero binario i cui nodi contengono interi, si vuole cancellare ogni
+  foglia che sia un figlio sinistro e contenga lo stesso intero del padre.
+  Si scriva una procedura ricorsiva di complessità ottima.
+
+[ ][Inserisci foglie]
+
+  Dato un albero binario, si vuole aggiungere ad ogni foglia un figlio sinistro
+  contenente il valore 0. Si scriva una procedura ricorsiva di complessità
+  ottima.
+
+[ ][Raggruppa le foglie con 0 e 1]
+
+  Dato un albero binario le cui foglie contengono 0 od 1 e i cui nodi interni
+  contengono solo 0, si vuole cambiare il contenuto delle foglie in modo che,
+  visitandole da sinistra verso destra, si incontrino prima tutti gli 0 e poi
+  tutti gli 1. Si scriva una procedura ricorsiva di complessità ottima.
+
+[ ][Albero inverso]
+
+  Dato un abero binario, i cui nodi contengono elementi interi, si scriva una
+  procedura di complessità ottima per ottenere l'abero inverso, ovvero un
+  albero in cui il figlio destro (con relativo sottoalbero) è scambiato con il
+  figlio sinistro (con relativo sottoalbero)
+
+[ ][Somma del cammino]
+
+  Dato un abero binario i cui nodi contengono interi, si vuole aggiungere ad
+  ogni foglia un figlio contenente la somma dei valori che appaiono nel cammino
+  dalla radice a tale foglia. Si scriva una funzione ricorsiva di complessità
+  ottima
+
+[ ][Albero commpleto]
+
+  Un albero binario completo di altezza k è un albero binario in cui tutti
+  i nodi, tranne le foglie, hanno esattamente due figli, e tutte le foglie
+  si trovano al livello k. Scrivere una procedura che stabilisca se un
+  determinato albero T è completo oppure no.
+
+[ ][Visite iterative]
+
+  Utilizzando le pile, si scrivano tre procedure iterative di complessità
+  ottima per effettuare, rispettivamente, le visite anticipata, differita
+  e simmetrica di un albero binario.
+
+TABELLE HASH -------------------------------------------------------------------
+
+INSIEMI E DIZIONARI ------------------------------------------------------------
+
+GRAFI --------------------------------------------------------------------------
+
+CODE CON PRIORITÀ --------------------------------------------------------------
