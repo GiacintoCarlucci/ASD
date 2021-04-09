@@ -103,8 +103,117 @@ ALBERO--------------------------------------------------------------------------
 
 TABELLE HASH -------------------------------------------------------------------
 
+[ ]
+
+  Si consideri una tabella hash di dimensione m = 11 inizialmente vuota.
+  si mostri il contenuto della tabella dopo aver inserito nell'ordine, i valori
+  33,10,24,14,16,13,23,31,18,11,7.
+  Si assuma che le collisioni siano gestite mediante indirizzamento aperto
+  utilizzando come funzione di hash h(k), definita nel modo seguente:
+  h(k) = (h'(k) + 3i + i^2) mod m
+  h'(k) = k mod m
+  Mostrare il contenuto della tabella al termine degli inserimenti e calcolare
+  il numero medio di accessi alla tabella per la ricerca di una chiave presente 
+  nella tabella
+
+[ ]
+
+  Si definisca la realizzazione di un dizionario contenente in media 256 
+  elementi, in cui la chiave richiede 8 bit, in modo da minimizzare il tempo
+  di accesso
+
 INSIEMI E DIZIONARI ------------------------------------------------------------
+
+[ ][intersezione di liste non ordinate]
+
+  Si scriva la procedura di complessità ottima per intersection(), assumendo che
+  gli insiemi siano realizzati con liste non ordinate.
+
+[ ][Unione di liste non ordinate]
+
+  Si scriva la procedura di complessità ottima per union(), assumendo che gli
+  insiemi siano realizzati con liste non ordinate.
+
+[ ][Differenza con liste non ordinate]
+
+  Si scriva la procedura di complessità ottima per difference(), assumendo che
+  gli insiemi siano realizzati con liste ordinate.
+
+[ ][Differenza simmetrica]
+
+  La differenza simmetrica <A delta B> di due insiemi A e B è data da tutti gli
+  elementi che stanno nell'unione <A union B> ma non nell'intersezione
+  <A intersection B>. Si scrivano tre procedure per calcolare la differenza
+  simmetrica, assumendo realizzazioni con vettori booleani, liste non ordinate,
+  liste ordinate, rispettivamente.
+
+[ ][Realizzazione insieme con tabella hash]
+
+  Si scriva una funzione che restituisca l'insieme codominio di un dizionario,
+  ovvero l'insieme di tuttii valori contenuti nella coppie chiave-valore
+  registrati nel dizionario.
+
+[ ][LinkedHashSet]
+
+  Si realizzi una struttura di dati insieme basata su tabella hash il cui ordine
+  di iterazione (l'ordine in cui vengono analizzati gli elementi in caso di
+  utilizzo del costrutto foreach) corrisponda a quello di inserimento. Si tragga
+  ispirazione dalla specifica della classe LinkedHashSet contenuta nelle Java
+  Collections.
 
 GRAFI --------------------------------------------------------------------------
 
-CODE CON PRIORITÀ --------------------------------------------------------------
+[ ][DFS iterativa]
+
+  Scrivere una versione iterativa della DFS basata su pila dove l'ordine di
+  visita dei nodi e degli archi sia lo stesso di quello della versione
+  ricorsiva
+
+[ ][Grafo bipartito]
+
+  Un grafo non orientato G bipartito se l'insieme se l'insieme dei nodi può
+  essere partizionato in due sottoinsiemi tali che nessun arco connette due nodi
+  appartenenti alla stessa parte. G è 2-colorabile se ogni nodo può essere 
+  colorato di bianco o di rosso in modo che nodi connessi da archi siano
+  colorati con colori distinti. Si stabilisca tramite BFS se un grafo non 
+  orientato è bipartito oppure no.
+
+[ ][Larghezza albero radicato]
+
+  Si modifichi una visita BFS per calcolare la larghezza di un albero radicato
+
+[ ][Albero libero, non orientato]
+
+  Si scriva una procedura per stabilire se un grafo non orientato è un albero libero
+
+[ ][Scheduling]
+
+  Siano dati n programmi P1,P2,...,Pn che richiedono rispettivamente tempo
+  T1,T2,...,Tn per essere eseguiti. Tra i programmi è definita una relazione
+  < di precedenza aciclica tale che Pi < Pj se l'esecuzione di Pi deve essere
+  completata prima dell'inizio dell'esecuzione di Pj. Si fornisca una procedura
+  per determinare in tempo polinomialel'istante in cui iniziare l'esecuzione di
+  ciascun programma in modo da rispettare i vincoli di precedenza e terminare
+  l'esecuzione di tutti i programmi il prima possibile.
+
+[ ][Distanza massima]
+
+  Dato in input un grafo orientato G = (V,E) rappresentato tramite liste di
+  adiacenza e un nodo r € V, restituire il numero dei nodi in G raggiungibili
+  da r che si trovano alla massima distanza da r.
+
+[ ][Grafo quadrato]
+
+  il quadrato di un grafo orientato G = (V,E) è il grafo G^2 = (V,E^2) tale che
+  (u,w) € E^2 sse Esiste u:(v,u)€E AND (u,w)€E.
+  In altre parole, se esiste un percorso di due archi fra i nodi u e w. Scrivere
+  un algoritmo che, dato un grafo G rappresentato con matrice di adiacenza,
+  restituisce il grafo G^2.
+
+[ ][Diametro]
+
+  il diametro di un grafo è la lunghezza del "più lungo cammino breve", ovvero
+  la più grande lunghezza del cammino minimo (in termini di numero di archi)
+  fra tutte le coppie di nodi. Progettare un algoritmo che misuri il diametro di
+  un grafo.
+
