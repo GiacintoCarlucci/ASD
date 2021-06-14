@@ -55,6 +55,7 @@ public:
   void insListaOrdinata(tipoelem, posizione&);
 	void cancLista(posizione);
   void invertiLista();
+  void epuraLista();
 
 	/* Di Servizio*/
 	void stampaLista();
@@ -268,9 +269,42 @@ template<class T> void Lista<T>::invertiLista(void){
   }
 }
 
+//eliminazione duplicati
+template<class T> void Lista<T>::epuraLista(void){
+  const bool debug = false;
+
+  if(!this->listaVuota()){
+    Lista::posizione indice;
+    Lista::posizione temp;
+    Lista::posizione p;
+    for(indice = this->primoLista(); (!this->fineLista(indice)); indice = this->succLista(indice)){
+      //DEBUG STRING
+      if(debug){ std::cout<<"analyzing: "<<this->leggiLista(indice)<<"\n"; }
+      if(!this->fineLista(indice)){
+        temp = this->succLista(indice);
+        while(!this->fineLista(temp)){
+          //DEBUG STRING
+          if(debug){ std::cout<<"|"<<this->leggiLista(temp); }
+          if(this->leggiLista(indice) == this->leggiLista(temp)){
+            //DEBUG STRING
+            if(debug){ std::cout<<"--"; }
+            p = this->succLista(temp);
+            this->cancLista(temp);
+            temp = p;
+          }else{
+            temp = this->succLista(temp);
+          }
+        }
+      //DEBUG STRING
+      if(debug){ std::cout<<std::endl; }
+      }
+    }
+  }
+}
+
 template<class T> void Lista<T>::stampaLista() {
-	std::cout << "[";
-	Lista::posizione indice;
+  std::cout << "[";
+  Lista::posizione indice;
 	for (indice = this->primoLista(); (!this->fineLista(indice));
 			indice = this->succLista(indice)) {
 		std::cout << this->leggiLista(indice);

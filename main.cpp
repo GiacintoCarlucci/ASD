@@ -11,7 +11,6 @@
 
 int main(void) {
 	
-	 /* 
 	 std::cout<<"creazione della lista...\n";
 	 Lista<int> l;
 	 std::cout<<"la lista l è vuota: ";
@@ -57,8 +56,26 @@ int main(void) {
    }else{
     std::cout<<"l non palindroma\n";
    }
-  */
 
+   std::cout<<"creazione di una lista l3...\n";
+   Lista<int> l3;
+   indice = l3.primoLista();
+	 l3.insLista(5,indice=l3.succLista(indice));
+	 l3.insLista(7,indice=l3.succLista(indice));
+	 l3.insLista(3,indice=l3.succLista(indice));
+	 l3.insLista(2,indice=l3.succLista(indice));
+	 l3.insLista(2,indice=l3.succLista(indice));
+	 l3.insLista(1,indice=l3.succLista(indice));
+	 l3.insLista(2,indice=l3.succLista(indice));
+	 l3.insLista(3,indice=l3.succLista(indice));
+   l3.stampaLista();
+   std::cout<<"epurazione di l3...\n";
+   l3.epuraLista();
+   l3.stampaLista();
+
+
+
+  /*
 	 Grafo<std::string> G;
 	 Vertex<std::string> U, V, O,P;
 	 U.label = "U";
@@ -150,6 +167,9 @@ int main(void) {
 	 std::cout<<"\nVisita DFS:\n";
 	 std::vector<Vertex<int>> vetA;
 	 A.DFS(a,vetA);
+  */
+
+
   /*CODA
 	 Coda<int> C;
 	 C.inCoda(1);

@@ -6,12 +6,11 @@ LISTA---------------------------------------------------------------------------
   n >= 1, costruisca due liste L ed M tali che L = 1, 2, ..., n-1, n
   ed M = n, n-1, ..., 2, 1.
 
-[ ][Epurazione]
+[x][Epurazione]
 
   Si scriva una procedura che, data una lista L di interi, restituisca un'altra
-  lista M che contenga solo gli elementi di L i cui valori non compaiono
-  esattamente due volte.
-  (es: se L = 5,7,3,2,2,1,2,3, allora M = 5,7,2,2,1,2).
+  lista M senza duplicati.
+  (es: se L = 5,7,3,2,2,1,2,3, allora M = 5,7,3,2,1).
 
 [ ][Pari e dispari]
 
