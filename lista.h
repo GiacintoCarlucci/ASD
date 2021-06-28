@@ -56,6 +56,7 @@ public:
 	void cancLista(posizione);
   void invertiLista();
   void epuraLista();
+  void pariDispari(posizione, int, int);
 
 	/* Di Servizio*/
 	void stampaLista();
@@ -297,6 +298,48 @@ template<class T> void Lista<T>::epuraLista(void){
         }
       //DEBUG STRING
       if(debug){ std::cout<<std::endl; }
+      }
+    }
+  }
+}
+
+template<class T> void Lista<T>::pariDispari(Lista::posizione pos, int ripetizioni, int tot){
+  const bool debug = false;
+
+  T elemento = this->leggiLista(pos);
+  Lista::posizione temp;
+  //DEBUG STRING
+  if(debug){
+    std::cout<<"--- ENTER ---\n";
+    std::cout<<"tot: "<<tot<<"\n";
+    std::cout<<"ripetizioni: "<<ripetizioni<<"\n";
+    std::cout<<"elemento: "<<elemento<<"\n";
+  }
+  if(!this->fineLista(pos)){
+    if(elemento % 2 == 0){
+      //DEBUG STRING
+      if(debug){std::cout<<"pari\n";}
+      tot++;
+      temp = this->succLista(pos);
+      this->cancLista(pos);
+      ripetizioni = tot;
+      this->pariDispari(temp,ripetizioni,tot);
+    }else{
+      //DEBUG STRING
+      if(debug){std::cout<<"dispari\n";}
+      if(ripetizioni > 0){
+        this->insLista(elemento,pos);
+        ripetizioni--;
+        pos = this->succLista(pos);
+        this->pariDispari(pos,ripetizioni,tot);
+      }else{
+        if(this->fineLista(this->precLista(pos)) || this->leggiLista(this->precLista(pos)) == elemento){
+          pos = this->succLista(pos);
+          this->pariDispari(pos,ripetizioni,tot);
+        }else{
+          ripetizioni = tot;
+          this->pariDispari(pos,ripetizioni,tot);
+        }
       }
     }
   }

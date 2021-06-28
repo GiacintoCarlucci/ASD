@@ -12,7 +12,7 @@ LISTA---------------------------------------------------------------------------
   lista M senza duplicati.
   (es: se L = 5,7,3,2,2,1,2,3, allora M = 5,7,3,2,1).
 
-[ ][Pari e dispari]
+[x][Pari e dispari]
 
   Si scriva una procedura ricorsiva che data una lista L di interi, la modifichi
   eliminando ogni elemento pari e replicando ogni elemento dispari tante volte
