@@ -1,3 +1,5 @@
+#include <iostream>
+
 #ifndef ALBERO_H_
 #define ALBERO_H_
 
@@ -56,6 +58,7 @@ public:
 	NodoAN<T>* padre(NodoAN<T>) const;
 	NodoAN<T>* primoFiglio(NodoAN<T>) const;
 	NodoAN<T>* succFratello(NodoAN<T>) const;
+  int altezza(NodoAN<T>*) const;
 
 	//Modficatori
 	void insRadice(T);
@@ -280,9 +283,22 @@ template<class T> void Albero<T>::cancSottoAlbero(NodoAN<T>* u) {
 	}
 }
 
+template<class T> int Albero<T>::altezza(NodoAN<T> *u) const {
+  int max = 0;
+  u = u->primoFiglio;
+    while(u != nullptr){
+      int t  = altezza(u) + 1;
+      if (t > max){
+        max = t;
+      }
+      u = u->fratello;
+    }
+  return max;
+}
+
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
 	if (!this->alberoVuoto()) {
-		//se il nodo passato come parametro è una radice allora la stampa
+		//se il nodo passato come parametro ? una radice allora la stampa
 		if (u->padre == this->albero)
 			std::cout << *u;
 		//se ha figli
