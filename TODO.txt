@@ -21,7 +21,7 @@ LISTA---------------------------------------------------------------------------
 
 ALBERO--------------------------------------------------------------------------
 
-[ ][Altezza]
+[x][Altezza]
 
   L'altezza di un albero ordinato è il massimo livello delle sue foglie.
   Si fornisca una funzione che calcoli in tempo ottimo l'altezza di un albero
