@@ -67,6 +67,9 @@ public:
 	void insSottoAlberoFiglio(NodoAN<T>*, Albero);
 	void insSottoAlberoFratello(NodoAN<T>*, Albero);
 	void cancSottoAlbero(NodoAN<T>*);
+	void cancFiglio(NodoAN<T>*);
+	void cancFratello(NodoAN<T>*);
+  bool leafk(NodoAN<T>*,int,int);
 
 	void stampaAlbero(NodoAN<T>*);
 	void aggiornaLivelli(NodoAN<T>*);
@@ -283,6 +286,22 @@ template<class T> void Albero<T>::cancSottoAlbero(NodoAN<T>* u) {
 	}
 }
 
+template<class T> void Albero<T>::cancFiglio(NodoAN<T>* u){
+  if(u != nullptr && u->primoFiglio != nullptr){
+    NodoAN<T> * nuovoFiglio = u->primoFiglio->fratello;
+    delete(u->primoFiglio);
+    u->primoFiglio = nuovoFiglio;
+  }
+}
+
+template<class T> void Albero<T>::cancFratello(NodoAN<T>* u){
+  if(u != nullptr && u->fratello != nullptr){
+    NodoAN<T> * nuovoFratello = u->fratello;
+    delete(u->fratello);
+    u->fratello = nuovoFratello;
+  }
+}
+
 template<class T> int Albero<T>::altezza(NodoAN<T> *u) const {
   int max = 0;
   u = u->primoFiglio;
@@ -294,6 +313,47 @@ template<class T> int Albero<T>::altezza(NodoAN<T> *u) const {
       u = u->fratello;
     }
   return max;
+}
+
+template<class T> bool Albero<T>::leafk(NodoAN<T>* t,int k,int somma){
+  somma = somma + t->elemento;
+  if(somma == k && t->primoFiglio != nullptr){
+    return true;
+  }else{
+
+    while(t->primoFiglio != nullptr && this->leafk(t->primoFiglio,k,somma)){
+      //cancella figlio di t
+      if(t->primoFiglio->fratello != nullptr){
+        NodoAN<T> *fratello = t->primoFiglio->fratello;
+        delete t->primoFiglio;
+        t->primoFiglio = fratello;
+      }else{
+        delete t->primoFiglio;
+        t->primoFiglio = nullptr;
+      }
+      NodoAN<T> *u = t->primoFiglio;
+      NodoAN<T> *v = nullptr;
+      if(u != nullptr && u->fratello != nullptr){
+        v = u->fratello; 
+      }
+      while(v != nullptr){
+        if(this->leafk(v,k,somma)){
+          //cancella fratello di u
+          if(u->fratello != nullptr){
+           if(u->fratello->fratello != nullptr){
+            NodoAN<T> *fratello = u->fratello->fratello;
+            delete u->fratello;
+            u->fratello = fratello;
+           } 
+          }
+        }else{
+          u = v;
+        }
+        v = u->fratello;
+      }
+    }
+    return false;
+  }
 }
 
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
