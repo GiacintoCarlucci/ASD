@@ -20,7 +20,7 @@ int main(void){
   // 3+13+50+70 = 136
   // dovrei rimuovere l'ultimo nodo = 70
 
-  const int k = 8;
+  const int k = 136;
   Albero<int> albero;
 
 	albero.insRadice(3);

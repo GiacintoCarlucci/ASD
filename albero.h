@@ -15,14 +15,38 @@ struct NodoAN {
 	NodoAN<T> * primoFiglio = nullptr;
 	NodoAN<T> * fratello = nullptr;
 
-	~NodoAN() {
-		if (primoFiglio)
-			delete primoFiglio;
-		primoFiglio = nullptr;
-		if (fratello)
-			delete fratello;
-		fratello = nullptr;
+  NodoAN<T>(){
+    elemento = T();
+    livello = 0;
+    padre = nullptr;
+    primoFiglio = nullptr;
+    fratello = nullptr;
+  }
 
+  NodoAN<T>(NodoAN<T> *u){
+    if(u != nullptr){
+      elemento = u->elemento;
+      livello = u->livello;
+      padre = u->padre;
+      primoFiglio = u->primoFiglio;
+      fratello = u->fratello;
+    }else{
+      elemento = T();
+      livello = 0;
+      padre = nullptr;
+      primoFiglio = nullptr;
+      fratello = nullptr;
+    }
+  }
+
+  ~NodoAN<T>() {
+    if (primoFiglio)
+      delete primoFiglio;
+    primoFiglio = nullptr;
+    if (fratello)
+      delete fratello;
+    fratello = nullptr;
+    livello = 0;
 	}
 
 	NodoAN<T>& operator=(const NodoAN<T> &rhs) {
@@ -288,17 +312,32 @@ template<class T> void Albero<T>::cancSottoAlbero(NodoAN<T>* u) {
 
 template<class T> void Albero<T>::cancFiglio(NodoAN<T>* u){
   if(u != nullptr && u->primoFiglio != nullptr){
-    NodoAN<T> * nuovoFiglio = u->primoFiglio->fratello;
     delete(u->primoFiglio);
-    u->primoFiglio = nuovoFiglio;
+    u->primoFiglio = nullptr;
   }
 }
 
+// CHECK WITH GDB
 template<class T> void Albero<T>::cancFratello(NodoAN<T>* u){
   if(u != nullptr && u->fratello != nullptr){
-    NodoAN<T> * nuovoFratello = u->fratello;
+    NodoAN<T> *padre = nullptr;
+    NodoAN<T> *fratello = nullptr;
+    T elemento = T();
+    int livello = 0;
+
+    if(u->fratello->fratello != nullptr){
+      padre = u->padre;
+      fratello = u->fratello->fratello;
+      elemento = u->fratello->fratello->elemento;
+      livello = u->fratello->fratello->livello;
+    }
+
     delete(u->fratello);
-    u->fratello = nuovoFratello;
+
+    u->fratello->padre = padre;
+    u->fratello = fratello;
+    u->fratello->elemento = elemento;
+    u->fratello->livello = livello;
   }
 }
 
@@ -317,53 +356,40 @@ template<class T> int Albero<T>::altezza(NodoAN<T> *u) const {
 
 template<class T> bool Albero<T>::leafk(NodoAN<T>* t,int k,int somma){
   somma = somma + t->elemento;
-  if(somma == k && t->primoFiglio != nullptr){
+  if(somma == k && t->primoFiglio == nullptr){
     return true;
   }else{
 
     while(t->primoFiglio != nullptr && this->leafk(t->primoFiglio,k,somma)){
       //cancella figlio di t
-      if(t->primoFiglio->fratello != nullptr){
-        NodoAN<T> *fratello = t->primoFiglio->fratello;
-        delete t->primoFiglio;
-        t->primoFiglio = fratello;
+      this->cancFiglio(t);
+    }
+    NodoAN<T> *u = t->primoFiglio;
+    NodoAN<T> *v = nullptr;
+    if(u != nullptr && u->fratello != nullptr){
+      v = u->fratello; 
+    }
+    while(v != nullptr){
+      if(this->leafk(v,k,somma)){
+        //cancella fratello di u
+        this->cancFratello(u); 
       }else{
-        delete t->primoFiglio;
-        t->primoFiglio = nullptr;
+        u = v;
       }
-      NodoAN<T> *u = t->primoFiglio;
-      NodoAN<T> *v = nullptr;
-      if(u != nullptr && u->fratello != nullptr){
-        v = u->fratello; 
-      }
-      while(v != nullptr){
-        if(this->leafk(v,k,somma)){
-          //cancella fratello di u
-          if(u->fratello != nullptr){
-           if(u->fratello->fratello != nullptr){
-            NodoAN<T> *fratello = u->fratello->fratello;
-            delete u->fratello;
-            u->fratello = fratello;
-           } 
-          }
-        }else{
-          u = v;
-        }
-        v = u->fratello;
-      }
+      v = u->fratello;
     }
     return false;
   }
 }
 
 template<class T> void Albero<T>::stampaAlbero(NodoAN<T> *u) {
-	if (!this->alberoVuoto()) {
-		//se il nodo passato come parametro ? una radice allora la stampa
-		if (u->padre == this->albero)
-			std::cout << *u;
-		//se ha figli
-		if (u->primoFiglio != nullptr) {
-			u = u->primoFiglio;
+  if (!this->alberoVuoto()) {
+    //se il nodo passato come parametro ? una radice allora la stampa
+    if (u->padre == this->albero)
+      std::cout << *u;
+    //se ha figli
+    if (u->primoFiglio != nullptr) {
+      u = u->primoFiglio;
 			//serve per essere sicuri che tutti i livelli siano corretti (magari poi fare una funz apposita)
 			u->livello = u->padre->livello + 1;
 			//stampa il figlio
